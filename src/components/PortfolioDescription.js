@@ -1,5 +1,5 @@
 import React from "react";
-const Portfolio = ({ portfolio }) => {
+const PortfolioDescription = ({ portfolio }) => {
   console.log("from portfolio ", portfolio);
   return (
     <div>
@@ -12,4 +12,4 @@ const Portfolio = ({ portfolio }) => {
     </div>
   );
 };
-export default Portfolio;
+export default PortfolioDescription;

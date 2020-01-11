@@ -1,0 +1,68 @@
+{
+  "portfolios": [
+    {
+      "content": "Book Store Application. In this application...You can login to this application",
+      "technology": "SpringBoot, Java & Thymeleaf",
+      "type": "Full-stack",
+      "info": "https://khem-bookcategory.herokuapp.com/login",
+      "votes": 0,
+      "id": "1"
+    },
+    {
+      "content": "Fitness club's customer registery, customer information and scheduling etc. You can login to this app or create your ow credentials",
+      "technology": "Reactjs, ES6, JSX-Syntax",
+      "type": "Front-End",
+      "info": "https://khem-fitnessclub-db.herokuapp.com/",
+      "votes": 0,
+      "id": "2"
+    },
+    {
+      "content": "abcdefgh",
+      "technology": "abcdefgh",
+      "info": "abcdefgh",
+      "type": "abcdefgh",
+      "votes": 0,
+      "id": "908"
+    },
+    {
+      "content": "d",
+      "technology": "d",
+      "info": "d",
+      "type": "d",
+      "votes": 0,
+      "id": "9338"
+    },
+    {
+      "content": "fdf",
+      "technology": "fd",
+      "info": "df",
+      "type": "df",
+      "votes": 0,
+      "id": "6835"
+    },
+    {
+      "content": "pqrst",
+      "technology": "pqrst",
+      "info": "pqrst",
+      "type": "pqrst",
+      "votes": 0,
+      "id": "896"
+    },
+    {
+      "content": "KHEMRAJNEUPANE",
+      "technology": "KHEMRAJNEUPANE",
+      "info": "KHEMRAJNEUPANE",
+      "type": "KHEMRAJNEUPANE",
+      "votes": 0,
+      "id": "923"
+    },
+    {
+      "content": "WithRouterCreate",
+      "technology": "WithRouterCreate",
+      "info": "WithRouterCreate",
+      "type": "WithRouterCreate",
+      "votes": 0,
+      "id": "1324"
+    }
+  ]
+}
