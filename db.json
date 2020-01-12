@@ -48,5 +48,34 @@
       "votes": "4",
       "id": "1789"
     }
+  ],
+  "workexperiences": [
+    {
+      "job_title": "Group Leader ",
+      "company": "SOL Palvelut OY",
+      "start_date": "2007-10-22",
+      "end_date": "2014-10-22",
+      "responsibilities": "Housekeeping as team leader",
+      "rating": 3,
+      "id": "1"
+    },
+    {
+      "job_title": "Full-Stack Software Developer ",
+      "company": "CRF Health",
+      "start_date": "2019-08-13",
+      "end_date": "2019-12-13",
+      "responsibilities": "Building REST APIs with Node.js & Express library, \n creating Mongoose schema for the MongoDB database, \n back-end integration testing with Mocha & Chai, \n front-end unit testing with Jest & Enzyme for a React.js application,\n automated testing in Robot Framework with Selenium Library, \n continuous Integration with Jenkins for Web application test automation.",
+      "rating": 5,
+      "id": "2"
+    },
+    {
+      "job_title": "International Business Developer",
+      "company": "CoreFinland Oy",
+      "start_date": "2009-02-04",
+      "end_date": "2009-09-05",
+      "responsibilities": "Preparing company's business plans, updating its web-contents, marketing products & presenting weekly work progress in meetings ",
+      "rating": "4",
+      "id": "6368"
+    }
   ]
 }

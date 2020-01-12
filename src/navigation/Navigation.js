@@ -3,12 +3,15 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import About from "../components/About";
 import PortfolioList from "../components/PortfolioList";
 import PortfolioDescription from "../components/PortfolioDescription";
+import WorkExperienceDescription from "../components/WorkExperienceDescription";
+
 import Footer from "../components/Footer";
 import WithRouterCreate from "../components/CreateNewPortfolio";
 import CurriculumVitae from "../components/CV";
 import Hobbies from "../components/Hobbies";
 import { Button } from "react-bootstrap";
-import Works from "../components/Works";
+import WithRouterCreateWorkExperience from "../components/CreateNewWorkExperience";
+import WorkExperienceList from "../components/WorkExperienceList";
 const HeaderLink = () => {
   const styles = {
     height: 100,
@@ -28,7 +31,7 @@ const HeaderLink = () => {
           />
         </Link>
       </div>
-      {/*{<img style={styles}  src={require("../assets/pic.png")} alt="khempic" />}*/}
+      
 
       <Link className="navbar-brand" to="/">
         <Button className="primary" active>
@@ -41,6 +44,12 @@ const HeaderLink = () => {
           Projects
         </Button>
       </Link>
+
+      <Link className="navbar-brand" to="/workexperience">
+        <Button className="primary" active>
+          WorkExperience
+        </Button>
+      </Link>      
 
       <Link className="navbar-brand" to="/cv">
         <Button className="primary" active>
@@ -59,11 +68,12 @@ const HeaderLink = () => {
           Hobbies
         </Button>
       </Link>
-      <Link className="navbar-brand" to="/works">
+ 
+      <Link className="navbar-brand" to="/createjobs">
         <Button className="primary" active>
-          Works
+          Create Jobs
         </Button>
-      </Link>
+      </Link>      
     </div>
   );
 };
@@ -87,12 +97,13 @@ const Navigation = props => {
       return (<CurriculumVitae />), (<Footer />);
     } else if (page === "hobbies") {
       return (<Hobbies />), (<Footer />);
-    } else if (page === "works") {
-      return (<Works />), (<Footer />);
+    }else if (page === "workexperience") {
+      return (<WorkExperienceList />), (<Footer />);
     }
   };
 
   const portfolioById = id => props.portfolio.find(a => a.id === id);
+  const workExperienceById = id => props.workexperience.find(a=>a.id ===id)
   const styles = {
     height: "100%",
     width: "100%",
@@ -124,15 +135,35 @@ const Navigation = props => {
               />
             )}
           />
-          <Route exact path="/" render={() => <About />} />
+          <Route
+            exact
+            path="/workexperience"
+            render={() => <WorkExperienceList workexperience={props.workexperience} />}
+          />          
+          <Route
+            exact
+            path="/workexperience/:id"
+            render={({ match }) => (
+              <WorkExperienceDescription
+                workexperience={workExperienceById(match.params.id)}
+              />
+            )}
+          />          
+          <Route exact path="/" render={() => <About />} /> 
           <Route
             exact
             path="/create"
             render={() => <WithRouterCreate addNew={props.addNew} />}
           />
+         <Route
+            exact
+            path="/createjobs"
+            render={() => <WithRouterCreateWorkExperience addNewWork={props.addNewWork} />}
+          />
+
           <Route exact path="/cv" render={() => <CurriculumVitae />} />
           <Route exact path="/hobbies" render={() => <Hobbies />} />
-          <Route exact path="/works" render={() => <Works />} />
+          
         </div>
       </Router>
       {conditionalRender()}
