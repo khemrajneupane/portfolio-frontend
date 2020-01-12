@@ -4,6 +4,6 @@ const CurriculumVitae = () => {
     height: "100%",
     width: "100%"
   };
-  return <img style={styles} src={require("../assets/CV.png")} alt="cvimage" />;
+  return <div className="container"><img style={styles} src={require("../assets/CV.png")} alt="cvimage" /></div>;
 };
 export default CurriculumVitae;

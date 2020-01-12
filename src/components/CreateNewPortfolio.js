@@ -21,7 +21,7 @@ const CreateNewPortfolio = props => {
   };
 
   return (
-    <div className="flex-b ">
+    <div className="container">
       <h2>create a new anecdote</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -69,7 +69,8 @@ const CreateNewPortfolio = props => {
             onChange={e => setVotes(e.target.value)}
           />
         </div>
-        <button>create</button>
+       
+        <button className="btn btn-primary">Create</button>
       </form>
     </div>
   );

@@ -8,34 +8,50 @@ import WithRouterCreate from "../components/CreateNewPortfolio";
 import CurriculumVitae from "../components/CV";
 
 const HeaderLink = () => {
-  const padding = {
-    paddingRight: 5
+  const styles = {
+    height: 150,
+    marginRight:-150,
+    padding:15
   };
   return (
-    <div>
-      <Link style={padding} to="/">
+    <div className="flex container jumbotron">
+                
+            {/*{<img style={styles}  src={require("../assets/pic.png")} alt="khempic" />}*/}
+        <button className="btn btn-secondary">  
+      <Link   to="/">
         About
       </Link>
-
-      <Link style={padding} to="/portfolio">
+      </button> 
+      <button className="btn btn-secondary">
+      <Link   to="/portfolio">
         Portfolio
       </Link>
-      <Link style={padding} to="/cv">
+      </button>
+      <button className="btn btn-secondary">
+      <Link  to="/cv">
         Curriculum Vitae
       </Link>
-      <Link style={padding} to="/create">
+      </button>
+      <button className="btn btn-secondary">
+      <Link   to="/create">
         Create Profile
       </Link>
+      </button>
     </div>
   );
 };
 
 /************************Navigation */
 const Navigation = props => {
-  const [page, setPage] = useState("about");
+  const [page, setPage] = useState("/");
+  const toPage = (page) => (event) => {
+    event.preventDefault()
+    setPage(page)
+  }
+  console.log(page)
   const conditionalRender = () => {
-    if (page === "about") {
-      return (<About />), (<Footer />);
+    if (page === "/" ) {
+      return (<About />),(<Footer />)
     } else if (page === "create") {
       return (<WithRouterCreate />), (<Footer />);
     } else if (page === "portfolio") {
@@ -51,9 +67,7 @@ const Navigation = props => {
     <div>
       <Router>
         <div>
-          <div>
-            <img src={require("../assets/pic.png")} alt="khempic" />
-          </div>
+
 
           <HeaderLink />
 
