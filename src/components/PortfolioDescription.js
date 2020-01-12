@@ -1,41 +1,31 @@
 import React from "react";
-import { Table } from 'react-bootstrap'
+import { Table } from "react-bootstrap";
 const PortfolioDescription = ({ portfolio }) => {
   console.log("from portfolio ", portfolio.content);
   return (
-    <div>
- <h2>{portfolio.content}</h2>
-  <Table striped bordered hover variant="dark">
-        <thead>
-
-        </thead>
+    <div className="container">
+      <h2>{portfolio.content}</h2>
+      <Table>
+        <thead></thead>
         <tbody>
-        <tr>
-        <th>Application Type</th>
-        <th>Technologies</th>
-        <th>URL/Deployment</th>
-        <th>My Ratings</th>
-        </tr>
-        
-          <tr>
-          <th>{portfolio.type}</th>
-            <td>
-              {portfolio.technology}
-            </td>
+          <tr className="bg-primary">
+            <th>Application Type</th>
+            <th>Technologies</th>
+            <th>URL/Deployment</th>
+            <th>Rate</th>
+          </tr>
+
+          <tr className="bg-success">
+            <th>{portfolio.type}</th>
+            <td>{portfolio.technology}</td>
 
             <td>
               <a href={portfolio.info}>{portfolio.info}</a>
-              </td>
-            <td>
-              {portfolio.votes}
             </td>
-          
+            <td>{portfolio.votes}</td>
           </tr>
- 
-       
-     
-     </tbody>
-          </Table> 
+        </tbody>
+      </Table>
     </div>
   );
 };

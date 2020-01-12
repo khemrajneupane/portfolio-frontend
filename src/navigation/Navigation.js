@@ -6,37 +6,64 @@ import PortfolioDescription from "../components/PortfolioDescription";
 import Footer from "../components/Footer";
 import WithRouterCreate from "../components/CreateNewPortfolio";
 import CurriculumVitae from "../components/CV";
-
+import Hobbies from "../components/Hobbies";
+import { Button } from "react-bootstrap";
+import Works from "../components/Works";
 const HeaderLink = () => {
   const styles = {
-    height: 150,
-    marginRight:-150,
-    padding:15
+    height: 100,
+    width: 100,
+    position: "relative",
+    bottom: 20
   };
   return (
     <div className="flex container jumbotron">
-                
-            {/*{<img style={styles}  src={require("../assets/pic.png")} alt="khempic" />}*/}
-        <button className="btn btn-secondary">  
-      <Link   to="/">
-        About
+      <div>
+        <Link className="navbar-brand" to="/portfolio">
+          <img
+            style={styles}
+            className="navbar-brand"
+            src={require("../assets/pic.png")}
+            alt="khempic"
+          />
+        </Link>
+      </div>
+      {/*{<img style={styles}  src={require("../assets/pic.png")} alt="khempic" />}*/}
+
+      <Link className="navbar-brand" to="/">
+        <Button className="primary" active>
+          About
+        </Button>
       </Link>
-      </button> 
-      <button className="btn btn-secondary">
-      <Link   to="/portfolio">
-        Portfolio
+
+      <Link className="navbar-brand" to="/portfolio">
+        <Button className="primary" active>
+          Projects
+        </Button>
       </Link>
-      </button>
-      <button className="btn btn-secondary">
-      <Link  to="/cv">
-        Curriculum Vitae
+
+      <Link className="navbar-brand" to="/cv">
+        <Button className="primary" active>
+          Curriculum Vitae
+        </Button>
       </Link>
-      </button>
-      <button className="btn btn-secondary">
-      <Link   to="/create">
-        Create Profile
+
+      <Link className="navbar-brand" to="/create">
+        <Button className="primary" active>
+          Create Profiles
+        </Button>
       </Link>
-      </button>
+
+      <Link className="navbar-brand" to="/hobbies">
+        <Button className="primary" active>
+          Hobbies
+        </Button>
+      </Link>
+      <Link className="navbar-brand" to="/works">
+        <Button className="primary" active>
+          Works
+        </Button>
+      </Link>
     </div>
   );
 };
@@ -44,31 +71,40 @@ const HeaderLink = () => {
 /************************Navigation */
 const Navigation = props => {
   const [page, setPage] = useState("/");
-  const toPage = (page) => (event) => {
-    event.preventDefault()
-    setPage(page)
-  }
-  console.log(page)
+  const toPage = page => event => {
+    event.preventDefault();
+    setPage(page);
+  };
+  console.log(page);
   const conditionalRender = () => {
-    if (page === "/" ) {
-      return (<About />),(<Footer />)
+    if (page === "/") {
+      return (<About />), (<Footer />);
     } else if (page === "create") {
       return (<WithRouterCreate />), (<Footer />);
     } else if (page === "portfolio") {
       return (<PortfolioList />), (<Footer />);
     } else if (page === "cv") {
       return (<CurriculumVitae />), (<Footer />);
+    } else if (page === "hobbies") {
+      return (<Hobbies />), (<Footer />);
+    } else if (page === "works") {
+      return (<Works />), (<Footer />);
     }
   };
 
   const portfolioById = id => props.portfolio.find(a => a.id === id);
+  const styles = {
+    height: "100%",
+    width: "100%",
+    border: "15px solid lightgrey",
+    marginBottom: "100px",
+    backgroundColor: "#f0edeb"
+  };
 
   return (
     <div>
       <Router>
         <div>
-
-
           <HeaderLink />
 
           <div style={{ backgroundColor: "lightblue" }}>
@@ -95,6 +131,8 @@ const Navigation = props => {
             render={() => <WithRouterCreate addNew={props.addNew} />}
           />
           <Route exact path="/cv" render={() => <CurriculumVitae />} />
+          <Route exact path="/hobbies" render={() => <Hobbies />} />
+          <Route exact path="/works" render={() => <Works />} />
         </div>
       </Router>
       {conditionalRender()}

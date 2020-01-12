@@ -2,7 +2,7 @@ import React from "react";
 import "../../src/index.css";
 
 const About = () => (
-  <div className ="container">
+  <div className="container">
     <section className="flex-a">
       <article className="flex-b">
         <h3>My Projects</h3>
@@ -214,34 +214,7 @@ const About = () => (
           </p>
         </div>
       </article>
-
-      <article className="flex-b">
-        <header>
-          <h3>My Hobbies</h3>
-        </header>
-        <p>
-          Other things I like to do in spare time are cycling, walking in the
-          nature and listening musics. I also like to make some Nepali dishes.
-        </p>
-        <p>
-          I have also done some volunteer works. As I was in Nepal, during the
-          time of earthquake crisis in April 2015, I personally, helped to
-          rescue many quake striken people to get them out from the piling
-          rubbles.{" "}
-        </p>
-        <p>
-          During the time of this crisis, there was no time to wait for aid
-          agencies or government forces to arrieve, rather urgent rescue was
-          required from anyone one who is safe and is witness to the scene. I
-          believe <q>Service to mankind is service to God.</q>{" "}
-        </p>
-        <p>
-          My favourite quote, since I was a standard 10 student-{" "}
-          <q>Laugh, the whole world will laugh with you but cry</q>
-        </p>
-      </article>
     </section>
-
   </div>
 );
 

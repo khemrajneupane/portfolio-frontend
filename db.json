@@ -5,7 +5,7 @@
       "technology": "SpringBoot, Java & Thymeleaf",
       "type": "Full-stack",
       "info": "https://khem-bookcategory.herokuapp.com/login",
-      "votes": 0,
+      "votes": 4,
       "id": "1"
     },
     {
@@ -13,8 +13,40 @@
       "technology": "Reactjs, ES6, JSX-Syntax",
       "type": "Front-End",
       "info": "https://khem-fitnessclub-db.herokuapp.com/",
-      "votes": 0,
+      "votes": 5,
       "id": "2"
+    },
+    {
+      "content": "Interesting front-end & backend project- Java-MariaDB, check Screen-shots. Student object and Student DAO are used to provide CRUD transactions to find student by ID, delete, find all students &insert new students’ values, into MariaDB etc. ",
+      "technology": "Java, Servlet, JSP, DAO interface, MARIA DB",
+      "info": "https://github.com/khemrajneupane/java-mariadb/blob/master/WebContent/WEB-INF/screenShots/listStudents.PNG",
+      "type": "Full-Stack",
+      "votes": 5,
+      "id": "3642"
+    },
+    {
+      "content": "This project is another example of Full-stack development in Node JS, Express, React JS, & Mongo DB technologies. Mongo DB account is created in the AWS cloud. You can add a new phonebook with numbers and names. Phone number must be unique. If the same name is entered, it alerts if you want to update the existing information. Every phonebook list contains a button for deleting.",
+      "technology": "Node JS, Express, React JS, Mongo DB",
+      "info": "https://fullstack2019helsinkiuni.herokuapp.com/",
+      "type": "Full-Stack",
+      "votes": "5",
+      "id": "8390"
+    },
+    {
+      "content": "A blogging application. You can create your user accounts. Login to application, see all the blogs entries but delete only the blog you have created. See the blogs on descending order by voting or rating and so on.",
+      "technology": "ReactJS, Express, NodeJS, exios, ES6 & JSX Syntaxing, MongoDB dataase in AWS",
+      "info": "https://github.com/khemrajneupane/fullstackopen2019/tree/master/part5/bloglist-frontend",
+      "type": "Full-Stack Development",
+      "votes": "5",
+      "id": "9324"
+    },
+    {
+      "content": "Frontend in build version added to Backend that is connected to database",
+      "technology": "ReactJS, Node, Express, MongoDB, ES6, JSX Syntaxing",
+      "info": "https://fullstack2019helsinkiuni.herokuapp.com/",
+      "type": "Full-Stack",
+      "votes": "4",
+      "id": "1789"
     }
   ]
 }
