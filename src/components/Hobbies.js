@@ -1,9 +1,13 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import Togglable from "./Togglable";
+
 const Hobbies = () => {
+  const styles = {
+    backgroundColor: "#d2dae2"
+  };
   return (
-    <div className="container">
+    <div className="container" style={styles}>
       <section>
         <Togglable
           buttonLabel={

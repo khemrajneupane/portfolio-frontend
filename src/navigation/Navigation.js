@@ -9,72 +9,82 @@ import Footer from "../components/Footer";
 import WithRouterCreate from "../components/CreateNewPortfolio";
 import CurriculumVitae from "../components/CV";
 import Hobbies from "../components/Hobbies";
-import { Button } from "react-bootstrap";
+
 import WithRouterCreateWorkExperience from "../components/CreateNewWorkExperience";
 import WorkExperienceList from "../components/WorkExperienceList";
+import {
+  Button,
+  Navbar,
+  Nav,
+  NavItem,
+  NavDropdown,
+  MenuItem
+} from "react-bootstrap";
 const HeaderLink = () => {
   const styles = {
-    height: 100,
+    height: 90,
     width: 100,
-    position: "relative",
-    bottom: 20
+    position: "relative"
   };
   return (
-    <div className="flex container jumbotron">
-      <div>
-        <Link className="navbar-brand" to="/portfolio">
-          <img
-            style={styles}
-            className="navbar-brand"
-            src={require("../assets/pic.png")}
-            alt="khempic"
-          />
-        </Link>
-      </div>
-      
-
-      <Link className="navbar-brand" to="/">
-        <Button className="primary" active>
-          About
-        </Button>
-      </Link>
-
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+      className="container"
+    >
       <Link className="navbar-brand" to="/portfolio">
-        <Button className="primary" active>
-          Projects
-        </Button>
+        <img
+          style={styles}
+          className="navbar-brand"
+          src={require("../assets/pic.png")}
+          alt="khempic"
+        />
       </Link>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+          <Link className="navbar-brand" to="/">
+            About Me
+          </Link>
+          <Link className="navbar-brand" to="/portfolio">
+            Projects
+          </Link>
+          <Link className="navbar-brand" to="/workexperience">
+            Experiences
+          </Link>
+          <Link className="navbar-brand" to="/cv">
+            CV
+          </Link>
+          <Link className="navbar-brand" to="/hobbies">
+            Hobbies
+          </Link>
+          <NavDropdown title="Create" id="collasible-nav-dropdown">
+            <NavDropdown.Item>
+              {" "}
+              <Link to="/createjobs">Create Jobs</Link>
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <Link to="/create">Create Profiles</Link>
+            </NavDropdown.Item>
 
-      <Link className="navbar-brand" to="/workexperience">
-        <Button className="primary" active>
-          WorkExperience
-        </Button>
-      </Link>      
-
-      <Link className="navbar-brand" to="/cv">
-        <Button className="primary" active>
-          Curriculum Vitae
-        </Button>
-      </Link>
-
-      <Link className="navbar-brand" to="/create">
-        <Button className="primary" active>
-          Create Profiles
-        </Button>
-      </Link>
-
-      <Link className="navbar-brand" to="/hobbies">
-        <Button className="primary" active>
-          Hobbies
-        </Button>
-      </Link>
- 
-      <Link className="navbar-brand" to="/createjobs">
-        <Button className="primary" active>
-          Create Jobs
-        </Button>
-      </Link>      
-    </div>
+            <NavDropdown.Divider />
+            <NavDropdown.Item
+              href="http://myy.haaga-helia.fi/~a1800727/DigitalServiceTask/NepalFinlandAssignment/NepalAssignment/NepalWebsiteTemp/NepalWebsiteTemp.html"
+              target="blank"
+            >
+              My Favourite Link
+            </NavDropdown.Item>
+          </NavDropdown>
+        </Nav>
+        <Nav className="mr-auto">
+          <Link className="navbar-brand" to="/">
+            Khem Raj Neupane
+          </Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 
@@ -97,13 +107,13 @@ const Navigation = props => {
       return (<CurriculumVitae />), (<Footer />);
     } else if (page === "hobbies") {
       return (<Hobbies />), (<Footer />);
-    }else if (page === "workexperience") {
+    } else if (page === "workexperience") {
       return (<WorkExperienceList />), (<Footer />);
     }
   };
 
   const portfolioById = id => props.portfolio.find(a => a.id === id);
-  const workExperienceById = id => props.workexperience.find(a=>a.id ===id)
+  const workExperienceById = id => props.workexperience.find(a => a.id === id);
   const styles = {
     height: "100%",
     width: "100%",
@@ -138,8 +148,10 @@ const Navigation = props => {
           <Route
             exact
             path="/workexperience"
-            render={() => <WorkExperienceList workexperience={props.workexperience} />}
-          />          
+            render={() => (
+              <WorkExperienceList workexperience={props.workexperience} />
+            )}
+          />
           <Route
             exact
             path="/workexperience/:id"
@@ -148,22 +160,23 @@ const Navigation = props => {
                 workexperience={workExperienceById(match.params.id)}
               />
             )}
-          />          
-          <Route exact path="/" render={() => <About />} /> 
+          />
+          <Route exact path="/" render={() => <About />} />
           <Route
             exact
             path="/create"
             render={() => <WithRouterCreate addNew={props.addNew} />}
           />
-         <Route
+          <Route
             exact
             path="/createjobs"
-            render={() => <WithRouterCreateWorkExperience addNewWork={props.addNewWork} />}
+            render={() => (
+              <WithRouterCreateWorkExperience addNewWork={props.addNewWork} />
+            )}
           />
 
           <Route exact path="/cv" render={() => <CurriculumVitae />} />
           <Route exact path="/hobbies" render={() => <Hobbies />} />
-          
         </div>
       </Router>
       {conditionalRender()}

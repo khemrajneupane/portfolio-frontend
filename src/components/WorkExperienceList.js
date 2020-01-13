@@ -4,12 +4,10 @@ import "../../src/index.css";
 import { Table } from "react-bootstrap";
 const WorkExperienceList = ({ workexperience }) => (
   <div className="container">
-    <h2>My Work Experience Lists</h2>
-
     <Table striped bordered hover varient="dark">
       <thead></thead>
       <tbody>
-        <tr className="bg-primary">
+        <tr className="text-secondary">
           <th>Job Title</th>
           <th>Company Name</th>
         </tr>

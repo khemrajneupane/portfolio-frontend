@@ -40,7 +40,6 @@ const App = () => {
     }, 5000);
   };
 
- 
   return (
     <Navigation
       portfolio={portfolio}
