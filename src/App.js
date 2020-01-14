@@ -3,10 +3,14 @@ import "../src/index.css";
 import Navigation from "./navigation/Navigation";
 import portfolioServices from "./services/Portfolios";
 import workexperienceServices from "./services/Workexperiences";
+//import messageServices from "./services/Messages";
+
 
 const App = () => {
   const [portfolio, setPortfolio] = useState([]);
   const [workexperience, setWorkexperience] = useState([]);
+  //const [messages, setMessages] = useState([]);
+
   const [notification, setNotification] = useState("");
 
   useEffect(() => {
@@ -20,7 +24,13 @@ const App = () => {
       setWorkexperience(response);
     });
   }, []);
-
+/*
+  useEffect(() => {
+    messageServices.getAll().then(response => {
+      setMessages(response);
+    });
+  }, []);
+*/
   const addNew = newPortfolio => {
     newPortfolio.id = (Math.random() * 10000).toFixed(0);
     portfolioServices.create(newPortfolio);
@@ -39,7 +49,17 @@ const App = () => {
       setNotification(null);
     }, 5000);
   };
-
+/*
+  const addMessage = newMessage => {
+    newMessage.id = (Math.random() * 10000).toFixed(0);
+    messageServices.create(newMessage);
+    setMessages(messages.concat(newMessage));
+    setNotification(`Thank you ${newMessage.full_name} for message!`);
+    setTimeout(() => {
+      setNotification(null);
+    }, 5000);
+  };
+*/
   return (
     <Navigation
       portfolio={portfolio}
@@ -49,6 +69,7 @@ const App = () => {
       setWorkexperience={setWorkexperience}
       addNew={addNew}
       addNewWork={addNewWork}
+      
     />
   );
 };

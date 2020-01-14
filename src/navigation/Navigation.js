@@ -179,6 +179,7 @@ const Navigation = props => {
           <Route exact path="/hobbies" render={() => <Hobbies />} />
         </div>
       </Router>
+      
       {conditionalRender()}
     </div>
   );

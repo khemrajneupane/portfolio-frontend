@@ -77,5 +77,18 @@
       "rating": "4",
       "id": "6368"
     }
+  ],
+  "messages": [
+    {
+      "full_name": "Khem Raj Neupane",
+      "email": "shekharneupane@gmail.com",
+      "message": "I want to hire you, man!"
+    },
+    {
+      "full_name": "Babita Gartaula Neupane",
+      "email": "abitagneupane@gmail.com",
+      "message": "I love you sweetheart!",
+      "id": "6083"
+    }
   ]
 }
