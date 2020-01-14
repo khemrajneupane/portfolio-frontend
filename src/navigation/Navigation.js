@@ -12,14 +12,8 @@ import Hobbies from "../components/Hobbies";
 
 import WithRouterCreateWorkExperience from "../components/CreateNewWorkExperience";
 import WorkExperienceList from "../components/WorkExperienceList";
-import {
-  Button,
-  Navbar,
-  Nav,
-  NavItem,
-  NavDropdown,
-  MenuItem
-} from "react-bootstrap";
+import { MenuItem } from "@material-ui/core";
+import { Button, Navbar, Nav, NavItem, NavDropdown } from "react-bootstrap";
 const HeaderLink = () => {
   const styles = {
     height: 90,
@@ -60,14 +54,13 @@ const HeaderLink = () => {
           <Link className="navbar-brand" to="/hobbies">
             Hobbies
           </Link>
-          <NavDropdown title="Create" id="collasible-nav-dropdown">
-            <NavDropdown.Item>
-              {" "}
-              <Link to="/createjobs">Create Jobs</Link>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <Link to="/create">Create Profiles</Link>
-            </NavDropdown.Item>
+          <NavDropdown title="Add" id="collasible-nav-dropdown">
+            <MenuItem>
+              <Link to="/createjobs">Experiences</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/create">Projects</Link>
+            </MenuItem>
 
             <NavDropdown.Divider />
             <NavDropdown.Item
@@ -98,17 +91,31 @@ const Navigation = props => {
   console.log(page);
   const conditionalRender = () => {
     if (page === "/") {
-      return (<About />), (<Footer />);
+      return (<About />), (<Footer setNotification={props.setNotification} />);
     } else if (page === "create") {
-      return (<WithRouterCreate />), (<Footer />);
+      return (
+        (<WithRouterCreate />),
+        (<Footer setNotification={props.setNotification} />)
+      );
     } else if (page === "portfolio") {
-      return (<PortfolioList />), (<Footer />);
+      return (
+        (<PortfolioList />),
+        (<Footer setNotification={props.setNotification} />)
+      );
     } else if (page === "cv") {
-      return (<CurriculumVitae />), (<Footer />);
+      return (
+        (<CurriculumVitae />),
+        (<Footer setNotification={props.setNotification} />)
+      );
     } else if (page === "hobbies") {
-      return (<Hobbies />), (<Footer />);
+      return (
+        (<Hobbies />), (<Footer setNotification={props.setNotification} />)
+      );
     } else if (page === "workexperience") {
-      return (<WorkExperienceList />), (<Footer />);
+      return (
+        (<WorkExperienceList />),
+        (<Footer setNotification={props.setNotification} />)
+      );
     }
   };
 
@@ -179,7 +186,7 @@ const Navigation = props => {
           <Route exact path="/hobbies" render={() => <Hobbies />} />
         </div>
       </Router>
-      
+
       {conditionalRender()}
     </div>
   );

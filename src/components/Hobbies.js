@@ -9,18 +9,7 @@ const Hobbies = () => {
   return (
     <div className="container" style={styles}>
       <section>
-        <Togglable
-          buttonLabel={
-            <Button className="btn btn-sm btn-outline-secondary">
-              My Hobbies...
-            </Button>
-          }
-          label={
-            <Button className="btn btn-sm btn-outline-danger">
-              Hide Hobbies...
-            </Button>
-          }
-        >
+        <Togglable buttonLabel={"My Hobbies..."} label={"Hide Hobbies..."}>
           <article className="flex-a">
             <header>
               <h3>My Hobbies</h3>
@@ -54,18 +43,7 @@ const Hobbies = () => {
           </article>
         </Togglable>
 
-        <Togglable
-          buttonLabel={
-            <Button className="btn btn-sm btn-outline-secondary">
-              My Poems...
-            </Button>
-          }
-          label={
-            <Button className="btn btn-sm btn-outline-danger">
-              Hide Poems...
-            </Button>
-          }
-        >
+        <Togglable buttonLabel={"My Poems..."} label={" Hide Poems..."}>
           <article className="flex-b">
             <h3>Prosaic Me</h3>
             <p>
@@ -86,16 +64,8 @@ const Hobbies = () => {
           </article>
         </Togglable>
         <Togglable
-          buttonLabel={
-            <Button className="btn btn-sm btn-outline-secondary">
-              Anniversary Wish...
-            </Button>
-          }
-          label={
-            <Button className="btn btn-sm btn-outline-danger">
-              Hide Anniversary Wish...
-            </Button>
-          }
+          buttonLabel={"Anniversary Wish..."}
+          label={"Hide Anniversary Wish..."}
         >
           <article className="flex-a">
             <h3>One of the Anniversary Wishes to My SweetHeart</h3>
@@ -114,16 +84,8 @@ const Hobbies = () => {
           </article>
         </Togglable>
         <Togglable
-          buttonLabel={
-            <Button className="btn btn-sm btn-outline-secondary">
-              First Birthday Wish...
-            </Button>
-          }
-          label={
-            <Button className="btn btn-sm btn-outline-danger">
-              Hide Wishes...
-            </Button>
-          }
+          buttonLabel={"First Birthday Wish..."}
+          label={"Hide Wishes..."}
         >
           <article className="flex-b">
             <h3>First Birthday Wish to Daughter Biansha</h3>
@@ -142,16 +104,8 @@ const Hobbies = () => {
           </article>
         </Togglable>
         <Togglable
-          buttonLabel={
-            <Button className="btn btn-sm btn-outline-secondary">
-              Feelings At Daughter's Birth...
-            </Button>
-          }
-          label={
-            <Button className="btn btn-sm btn-outline-danger">
-              Hide Feelings...
-            </Button>
-          }
+          buttonLabel={"Feelings At Daughter's Birth..."}
+          label={"Hide Feelings..."}
         >
           <article className="flex-a">
             <h3>Expression of Impatient Wait to My First Princess</h3>

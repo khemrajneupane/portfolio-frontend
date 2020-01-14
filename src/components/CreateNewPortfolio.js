@@ -22,7 +22,7 @@ const CreateNewPortfolio = props => {
 
   return (
     <div className="container">
-      <h2>Add More Profiles</h2>
+      <h2>Add More Projects</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <input

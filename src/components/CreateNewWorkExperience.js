@@ -4,9 +4,9 @@ import "../../src/index.css";
 const CreateNewWorkExperience = props => {
   const [job_title, setJob_title] = useState("");
   const [company, setCompany] = useState("");
-  
-  const[start_date, setStart_date] = useState("")
-  const[end_date, setEnd_date] = useState("")
+
+  const [start_date, setStart_date] = useState("");
+  const [end_date, setEnd_date] = useState("");
   const [responsibilities, setResponsibilities] = useState("");
   const [rating, setRating] = useState("");
 
@@ -24,7 +24,7 @@ const CreateNewWorkExperience = props => {
   };
   return (
     <div className="container">
-      <h2>Add More Profiles</h2>
+      <h2>Add Work Experiences</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <input
@@ -45,7 +45,7 @@ const CreateNewWorkExperience = props => {
             placeholder="company name"
             onChange={e => setCompany(e.target.value)}
           />
-        </div>        
+        </div>
         <div>
           <input
             className="form-control"
@@ -65,7 +65,7 @@ const CreateNewWorkExperience = props => {
             placeholder="end date"
             onChange={e => setEnd_date(e.target.value)}
           />
-        </div>        
+        </div>
         <div>
           <input
             className="form-control"
@@ -76,7 +76,7 @@ const CreateNewWorkExperience = props => {
             onChange={e => setResponsibilities(e.target.value)}
           />
         </div>
-       
+
         <div>
           <input
             className="form-control"
