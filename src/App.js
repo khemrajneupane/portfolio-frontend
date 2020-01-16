@@ -102,6 +102,7 @@ const App = () => {
       }, 5000);
     }
   };
+  /**delete */
 
   return (
     <div>
@@ -118,7 +119,6 @@ const App = () => {
         </div>
       ) : (
         <div>
-          <Notification notification={notification} />
           <Navigation
             portfolio={portfolio}
             setNotification={setNotification}
