@@ -14,12 +14,18 @@ import WithRouterCreateWorkExperience from "../components/CreateNewWorkExperienc
 import WorkExperienceList from "../components/WorkExperienceList";
 import { MenuItem } from "@material-ui/core";
 import { Button, Navbar, Nav, NavItem, NavDropdown } from "react-bootstrap";
+import LoginForm from "../components/LoginForm";
+//import LogOut from "../components/Logout";
 const HeaderLink = () => {
   const styles = {
     height: 90,
     width: 100,
     position: "relative"
   };
+  const LogOut = () =>
+    window.localStorage.removeItem("loggedUser")
+      ? window.location.reload(true)
+      : window.location.reload(false);
   return (
     <Navbar
       collapseOnSelect
@@ -74,6 +80,11 @@ const HeaderLink = () => {
         <Nav className="mr-auto">
           <Link className="navbar-brand" to="/">
             Khem Raj Neupane
+          </Link>
+        </Nav>
+        <Nav className="mr-auto">
+          <Link className="navbar-brand" to="/logout" onClick={() => LogOut()}>
+            Logout
           </Link>
         </Nav>
       </Navbar.Collapse>
@@ -183,7 +194,7 @@ const Navigation = props => {
           />
 
           <Route exact path="/cv" render={() => <CurriculumVitae />} />
-          <Route exact path="/hobbies" render={() => <Hobbies />} />
+          <Route exact path="/logout" />
         </div>
       </Router>
 
