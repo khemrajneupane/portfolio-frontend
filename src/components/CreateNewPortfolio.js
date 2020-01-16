@@ -2,21 +2,11 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import "../../src/index.css";
 const CreateNewPortfolio = props => {
-  const [content, setContent] = useState("");
-  const [technology, settechnology] = useState("");
-  const [info, setInfo] = useState("");
-  const [type, setType] = useState("");
-  const [votes, setVotes] = useState("");
+ 
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.addNew({
-      content,
-      technology,
-      info,
-      type,
-      votes
-    });
+    props.addNew();
     props.history.push("/");
   };
 
@@ -28,50 +18,50 @@ const CreateNewPortfolio = props => {
           <input
             className="form-control"
             name="content"
-            value={content}
+            value={props.content}
             type="text"
             placeholder="project name or description"
-            onChange={e => setContent(e.target.value)}
+            onChange={props.handleContentChange}
           />
         </div>
         <div>
           <input
             className="form-control"
             name="technology"
-            value={technology}
+            value={props.technology}
             type="text"
             placeholder="technology names"
-            onChange={e => settechnology(e.target.value)}
+            onChange={props.handleTechnologyChange}
           />
         </div>
         <div>
           <input
             className="form-control"
             name="info"
-            value={info}
+            value={props.info}
             type="URL"
             placeholder="project link or URL"
-            onChange={e => setInfo(e.target.value)}
+            onChange={props.handleInfoChange}
           />
         </div>
         <div>
           <input
             className="form-control"
             name="type"
-            value={type}
+            value={props.type}
             type="text"
             placeholder="full-stack, frot-end back-end"
-            onChange={e => setType(e.target.value)}
+            onChange={props.handleTypeChange}
           />
         </div>
         <div>
           <input
             className="form-control"
             name="votes"
-            value={votes}
+            value={props.votes}
             type="number"
             placeholder="rate this project [1-5]"
-            onChange={e => setVotes(e.target.value)}
+            onChange={props.handleVotesChange}
           />
         </div>
 

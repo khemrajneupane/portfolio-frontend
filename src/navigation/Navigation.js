@@ -183,7 +183,19 @@ const Navigation = props => {
           <Route
             exact
             path="/create"
-            render={() => <WithRouterCreate addNew={props.addNew} />}
+            render={() => <WithRouterCreate
+              handleContentChange={props.handleContentChange}
+              handleTechnologyChange={props.handleTechnologyChange} 
+              addNew={props.addNew} 
+              handleInfoChange={props.handleInfoChange}
+              handleTypeChange={props.handleTypeChange}
+              handleVotesChange={props.handleVotesChange}
+              content={props.content}
+              technology={props.technology}
+              info={props.info}
+              type={props.type}
+              votes={props.votes}
+            />}
           />
           <Route
             exact

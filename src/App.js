@@ -20,7 +20,30 @@ const App = () => {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
 
+  const [content, setContent] = useState("");
+  const [technology, settechnology] = useState("");
+  const [info, setInfo] = useState("");
+  const [type, setType] = useState("");
+  const [votes, setVotes] = useState("");
+
   //window.localStorage.clear();
+
+  const handleContentChange = event => {
+    setContent(event.target.value);
+  };
+
+  const handleTechnologyChange = event => {
+    settechnology(event.target.value);
+  };
+  const handleInfoChange = event => {
+    setInfo(event.target.value);
+  };
+  const handleTypeChange = event => {
+    setType(event.target.value);
+  };
+  const handleVotesChange = event => {
+    setVotes(event.target.value);
+  };
 
   useEffect(() => {
     portfolioServices.getAll().then(response => {
@@ -53,6 +76,41 @@ const App = () => {
     setPassword(event.target.value);
   };
 
+  /**add new portfolio */
+  const addNew = async () => {
+  
+    const newObject = {
+     content,
+      technology,
+      info,
+      type,
+      votes
+    };
+
+     
+      try {
+        await portfolioServices.create(newObject, user.token);
+        setPortfolio(portfolio.concat(newObject));
+        setNotification(`a new blog ${newObject.info} by ${newObject.technology} added `);
+        setTimeout(() => {
+          setNotification(null);
+        }, 5000);
+        //setTitle("");
+        //setAuthor("");
+        //setUrl("");
+        //setLikes("");
+      } catch (error) {
+        setNotification(error.message);
+        setTimeout(() => {
+          setNotification(null);
+        }, 5000);
+      }
+
+    }
+  
+  
+
+/*
   const addNew = newPortfolio => {
     newPortfolio.id = (Math.random() * 10000).toFixed(0);
     portfolioServices.create(newPortfolio);
@@ -63,7 +121,7 @@ const App = () => {
       setNotification(null);
     }, 5000);
   };
-
+*/
   const addNewWork = newWork => {
     newWork.id = (Math.random() * 10000).toFixed(0);
     workexperienceServices.create(newWork);
@@ -127,6 +185,19 @@ const App = () => {
             setWorkexperience={setWorkexperience}
             addNew={addNew}
             addNewWork={addNewWork}
+
+            handleContentChange={handleContentChange}
+              handleTechnologyChange={handleTechnologyChange} 
+              addNew={addNew} 
+              handleInfoChange={handleInfoChange}
+              handleTypeChange={handleTypeChange}
+              handleVotesChange={handleVotesChange}
+
+              content={content}
+              technology={technology}
+              info={info}
+              type={type}
+              votes={votes}
           />
         </div>
       )}

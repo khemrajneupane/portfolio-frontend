@@ -17,7 +17,7 @@ const PortfolioList = ({ portfolio }) => (
           <tr key={list.id}>
             <th>{list.technology}</th>
             <td>
-              <Link to={`/portfolio/${list.id}`}>{list.content} </Link>
+              <Link key={list.id} to={`/portfolio/${list.id}`}>{list.content} </Link>
             </td>
           </tr>
         ))}
