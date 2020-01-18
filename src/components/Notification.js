@@ -1,5 +1,6 @@
 import React from "react";
-import { Typography } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 const Notification = props => {
   const message = props.notification;
   const style = {
@@ -10,14 +11,24 @@ const Notification = props => {
     textAlign: "center"
   };
 
-  let msg = message ? (
+  return (
+    <div>
+      {props.notification ? (
+        <Alert onClose={() => <div>{props.notification}</div>}>{message}</Alert>
+      ) : (
+        <div></div>
+      )}
+    </div>
+  );
+};
+
+export default Notification;
+
+/* let msg = message ? (
     <Typography variant="h3" component="p" style={style}>
       {message}
     </Typography>
   ) : (
     <div></div>
   );
-  return msg;
-};
-
-export default Notification;
+  return msg; */

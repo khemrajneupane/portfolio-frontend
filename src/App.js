@@ -5,7 +5,6 @@ import portfolioServices from "./services/Portfolios";
 import workexperienceServices from "./services/Workexperiences";
 import Notification from "./components/Notification";
 
-//import SendMessage from "./components/SendMessage";
 import loginService from "./services/login";
 import LoginForm from "./components/LoginForm";
 
@@ -26,8 +25,35 @@ const App = () => {
   const [type, setType] = useState("");
   const [votes, setVotes] = useState("");
 
+  const [job_title, setJob_title] = useState("");
+  const [company, setCompany] = useState("");
+  const [start_date, setStart_date] = useState("");
+  const [end_date, setEnd_date] = useState("");
+  const [responsibilities, setResponsibilities] = useState("");
+  const [rating, setRating] = useState("");
+
   //window.localStorage.clear();
 
+  /************************************************ */
+  const handleJob_titleChange = event => {
+    setJob_title(event.target.value);
+  };
+  const handleCompanyChange = event => {
+    setCompany(event.target.value);
+  };
+  const handleStart_dateChange = event => {
+    setStart_date(event.target.value);
+  };
+  const handleEnd_dateChange = event => {
+    setEnd_date(event.target.value);
+  };
+  const handleResponsibilityChange = event => {
+    setResponsibilities(event.target.value);
+  };
+  const handleRatingChange = event => {
+    setRating(event.target.value);
+  };
+  /********************************************************* */
   const handleContentChange = event => {
     setContent(event.target.value);
   };
@@ -49,13 +75,13 @@ const App = () => {
     portfolioServices.getAll().then(response => {
       setPortfolio(response);
     });
-  }, []);
+  }, [portfolio]);
 
   useEffect(() => {
     workexperienceServices.getAll().then(response => {
       setWorkexperience(response);
     });
-  }, []);
+  }, [workexperience]);
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedUser");
@@ -78,59 +104,58 @@ const App = () => {
 
   /**add new portfolio */
   const addNew = async () => {
-  
     const newObject = {
-     content,
+      content,
       technology,
       info,
       type,
       votes
     };
 
-     
-      try {
-        await portfolioServices.create(newObject, user.token);
-        setPortfolio(portfolio.concat(newObject));
-        setNotification(`a new blog ${newObject.info} by ${newObject.technology} added `);
-        setTimeout(() => {
-          setNotification(null);
-        }, 5000);
-        //setTitle("");
-        //setAuthor("");
-        //setUrl("");
-        //setLikes("");
-      } catch (error) {
-        setNotification(error.message);
-        setTimeout(() => {
-          setNotification(null);
-        }, 5000);
-      }
-
+    try {
+      await portfolioServices.create(newObject, user.token);
+      setPortfolio(portfolio.concat(newObject));
+      setNotification(
+        `a new blog ${newObject.info} by ${newObject.technology} added `
+      );
+      setTimeout(() => {
+        setNotification(null);
+      }, 5000);
+      //setTitle("");
+      //setAuthor("");
+      //setUrl("");
+      //setLikes("");
+    } catch (error) {
+      setNotification(error.message);
+      setTimeout(() => {
+        setNotification(null);
+      }, 5000);
     }
-  
-  
-
-/*
-  const addNew = newPortfolio => {
-    newPortfolio.id = (Math.random() * 10000).toFixed(0);
-    portfolioServices.create(newPortfolio);
-    setPortfolio(portfolio.concat(newPortfolio));
-
-    setNotification(`a new portfolio ${newPortfolio.content} created!`);
-    setTimeout(() => {
-      setNotification(null);
-    }, 5000);
   };
-*/
-  const addNewWork = newWork => {
-    newWork.id = (Math.random() * 10000).toFixed(0);
-    workexperienceServices.create(newWork);
-    setPortfolio(workexperience.concat(newWork));
 
-    setNotification(`a new portfolio ${newWork.content} created!`);
-    setTimeout(() => {
-      setNotification(null);
-    }, 5000);
+  const addNewWork = async () => {
+    const newWork = {
+      job_title,
+      company,
+      start_date,
+      end_date,
+      responsibilities,
+      rating
+    };
+    try {
+      await workexperienceServices.create(newWork, user.token);
+      setWorkexperience(workexperience.concat(newWork));
+
+      setNotification(`a new work experience ${newWork.job_title} created!`);
+      setTimeout(() => {
+        setNotification(null);
+      }, 5000);
+    } catch (error) {
+      setNotification(error.message);
+      setTimeout(() => {
+        setNotification(null);
+      }, 5000);
+    }
   };
 
   /**handle login function */
@@ -141,7 +166,7 @@ const App = () => {
         username,
         password
       });
-      console.log("handleLogin user info", user);
+
       window.localStorage.setItem("loggedUser", JSON.stringify(user));
 
       portfolioServices.setToken(user.token);
@@ -160,7 +185,44 @@ const App = () => {
       }, 5000);
     }
   };
-  /**delete */
+  /**Delete Function */
+  const deleteList = async item => {
+    const { id, content } = item;
+    let r = window.confirm(`delete ${content} ?`);
+    if (r === true) {
+      try {
+        await portfolioServices.deleteList(id, user.token);
+        setNotification(
+          `Information of ${content} has been removed from the server.`
+        );
+        setTimeout(() => {
+          setNotification(null);
+        }, 5000);
+        //setItemObj({});
+      } catch (error) {
+        setPortfolio(portfolio);
+        setNotification(
+          `You have no permission to delete ${content} from the server.
+            Please refresh the page and try again!`
+        );
+        setTimeout(() => {
+          setNotification(null);
+        }, 5000);
+      }
+
+      setPortfolio(portfolio.filter(p => p.id !== id));
+      setNotification(`${content}'s entry has been erased`);
+      setTimeout(() => {
+        setNotification(null);
+      }, 5000);
+    } else if (r === false) {
+      setNotification(`You did not cancel ${content}'s entry`);
+      setTimeout(() => {
+        setNotification(null);
+      }, 5000);
+      return;
+    }
+  };
 
   return (
     <div>
@@ -184,20 +246,31 @@ const App = () => {
             workexperience={workexperience}
             setWorkexperience={setWorkexperience}
             addNew={addNew}
-            addNewWork={addNewWork}
-
             handleContentChange={handleContentChange}
-              handleTechnologyChange={handleTechnologyChange} 
-              addNew={addNew} 
-              handleInfoChange={handleInfoChange}
-              handleTypeChange={handleTypeChange}
-              handleVotesChange={handleVotesChange}
-
-              content={content}
-              technology={technology}
-              info={info}
-              type={type}
-              votes={votes}
+            handleTechnologyChange={handleTechnologyChange}
+            handleInfoChange={handleInfoChange}
+            handleTypeChange={handleTypeChange}
+            handleVotesChange={handleVotesChange}
+            content={content}
+            technology={technology}
+            info={info}
+            type={type}
+            votes={votes}
+            deleteList={deleteList}
+            user={user}
+            addNewWork={addNewWork}
+            job_title={job_title}
+            company={company}
+            start_date={start_date}
+            end_date={end_date}
+            responsibilities={responsibilities}
+            rating={rating}
+            handleJob_titleChange={handleJob_titleChange}
+            handleCompanyChange={handleCompanyChange}
+            handleStart_dateChange={handleStart_dateChange}
+            handleEnd_dateChange={handleEnd_dateChange}
+            handleResponsibilityChange={handleResponsibilityChange}
+            handleRatingChange={handleRatingChange}
           />
         </div>
       )}

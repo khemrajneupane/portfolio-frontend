@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import About from "../components/About";
-import PortfolioList from "../components/PortfolioList";
-import PortfolioDescription from "../components/PortfolioDescription";
-import WorkExperienceDescription from "../components/WorkExperienceDescription";
+import PortfolioList from "../components/portfolios/PortfolioList";
+import PortfolioDescription from "../components/portfolios/PortfolioDescription";
+import WorkExperienceDescription from "../components/experiences/WorkExperienceDescription";
 
 import Footer from "../components/Footer";
-import WithRouterCreate from "../components/CreateNewPortfolio";
+import WithRouterCreate from "../components/portfolios/CreateNewPortfolio";
 import CurriculumVitae from "../components/CV";
 import Hobbies from "../components/Hobbies";
 
-import WithRouterCreateWorkExperience from "../components/CreateNewWorkExperience";
-import WorkExperienceList from "../components/WorkExperienceList";
+import WithRouterCreateWorkExperience from "../components/experiences/CreateNewWorkExperience";
+import WorkExperienceList from "../components/experiences/WorkExperienceList";
 import { MenuItem } from "@material-ui/core";
 import { Button, Navbar, Nav, NavItem, NavDropdown } from "react-bootstrap";
 import LoginForm from "../components/LoginForm";
@@ -99,7 +99,7 @@ const Navigation = props => {
     event.preventDefault();
     setPage(page);
   };
-  console.log(page);
+
   const conditionalRender = () => {
     if (page === "/") {
       return (<About />), (<Footer setNotification={props.setNotification} />);
@@ -110,7 +110,12 @@ const Navigation = props => {
       );
     } else if (page === "portfolio") {
       return (
-        (<PortfolioList />),
+        (
+          <PortfolioList
+            portfolio={props.portfolio}
+            deleteList={props.deleteList}
+          />
+        ),
         (<Footer setNotification={props.setNotification} />)
       );
     } else if (page === "cv") {
@@ -145,14 +150,18 @@ const Navigation = props => {
       <Router>
         <div>
           <HeaderLink />
-
           <div style={{ backgroundColor: "lightblue" }}>
             {props.notification ? props.notification : null}
           </div>
           <Route
             exact
             path="/portfolio"
-            render={() => <PortfolioList portfolio={props.portfolio} />}
+            render={() => (
+              <PortfolioList
+                portfolio={props.portfolio}
+                deleteList={props.deleteList}
+              />
+            )}
           />
           <Route
             exact
@@ -183,28 +192,45 @@ const Navigation = props => {
           <Route
             exact
             path="/create"
-            render={() => <WithRouterCreate
-              handleContentChange={props.handleContentChange}
-              handleTechnologyChange={props.handleTechnologyChange} 
-              addNew={props.addNew} 
-              handleInfoChange={props.handleInfoChange}
-              handleTypeChange={props.handleTypeChange}
-              handleVotesChange={props.handleVotesChange}
-              content={props.content}
-              technology={props.technology}
-              info={props.info}
-              type={props.type}
-              votes={props.votes}
-            />}
+            render={() => (
+              <WithRouterCreate
+                handleContentChange={props.handleContentChange}
+                handleTechnologyChange={props.handleTechnologyChange}
+                addNew={props.addNew}
+                handleInfoChange={props.handleInfoChange}
+                handleTypeChange={props.handleTypeChange}
+                handleVotesChange={props.handleVotesChange}
+                content={props.content}
+                technology={props.technology}
+                info={props.info}
+                type={props.type}
+                votes={props.votes}
+              />
+            )}
           />
           <Route
             exact
             path="/createjobs"
             render={() => (
-              <WithRouterCreateWorkExperience addNewWork={props.addNewWork} />
+              <WithRouterCreateWorkExperience
+                addNewWork={props.addNewWork}
+                job_title={props.job_title}
+                company={props.company}
+                start_date={props.start_date}
+                end_date={props.end_date}
+                responsibilities={props.responsibilities}
+                rating={props.rating}
+                handleJob_titleChange={props.handleJob_titleChange}
+                handleCompanyChange={props.handleCompanyChange}
+                handleStart_dateChange={props.handleStart_dateChange}
+                handleEnd_dateChange={props.handleEnd_dateChange}
+                handleResponsibilityChange={props.handleResponsibilityChange}
+                handleRatingChange={props.handleRatingChange}
+              />
             )}
           />
 
+          <Route exact path="/hobbies" render={() => <Hobbies />} />
           <Route exact path="/cv" render={() => <CurriculumVitae />} />
           <Route exact path="/logout" />
         </div>

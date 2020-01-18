@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 const WorkExperienceDescription = ({ workexperience }) => {
-  console.log("from portfolio ", workexperience.job_title);
+  //console.log("from portfolio ", workexperience.job_title);
   return (
     <div className="container">
       <h2>{workexperience.responsibilities}</h2>
@@ -21,14 +21,13 @@ const WorkExperienceDescription = ({ workexperience }) => {
             <th>{workexperience.job_title}</th>
             <td>{workexperience.company}</td>
 
-            <td>
-              {workexperience.start_date}
-            </td>
-            <td>
-              {workexperience.end_date}
-            </td>            
+            <td>{workexperience.start_date}</td>
+            <td>{workexperience.end_date}</td>
             <td>{workexperience.responsibilities}</td>
             <td>{workexperience.rating}</td>
+            <td>
+              <button>delete</button>
+            </td>
           </tr>
         </tbody>
       </Table>

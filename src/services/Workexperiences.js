@@ -10,9 +10,12 @@ const getAll = () => {
   return request.then(response => response.data);
 };
 
-const create = newObject => {
-  const request = axios.post(baseUrl, newObject);
-  return request.then(response => response.data);
+const create = async (newObject, token) => {
+  const config = {
+    headers: { Authorization: `bearer ${token}` }
+  };
+  const request = await axios.post(baseUrl, newObject, config);
+  return request;
 };
 
 const update = (id, newObject) => {

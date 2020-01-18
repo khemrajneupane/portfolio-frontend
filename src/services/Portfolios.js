@@ -6,26 +6,30 @@ const setToken = newToken => {
   token = `bearer ${newToken}`;
 };
 
-const getAll = () => {
-  const request = axios.get(baseUrl);
-  return request.then(response => response.data);
+const getAll = async () => {
+  const request = await axios.get(baseUrl).then(response => response.data);
+  return request;
 };
 
 const create = async (newObject, token) => {
   const config = {
-      headers: { Authorization: `bearer ${token}` }
-  }
-  const request = await axios.post(baseUrl, newObject, config)
-  return request
-}
+    headers: { Authorization: `bearer ${token}` }
+  };
+  const request = await axios.post(baseUrl, newObject, config);
+  return request;
+};
 
 const update = (id, newObject) => {
   const request = axios.put(`${baseUrl}/${id}`, newObject);
   return request.then(response => response.data);
 };
-const deleteList = personId => {
-  const request = axios.delete(`${baseUrl}/${personId}`);
-  return request.then(response => response.data);
+
+const deleteList = (portfolioId, token) => {
+  const config = {
+    headers: { Authorization: `bearer ${token}` }
+  };
+  const request = axios.delete(`${baseUrl}/${portfolioId}`, config);
+  return request;
 };
 
 export default { getAll, create, update, deleteList, setToken };

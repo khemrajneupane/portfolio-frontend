@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from "react";
-import messageServices from "../../src/services/Messages";
+import messageServices from "../../services/Messages";
 
 const SendMessage = ({ setNotification }) => {
   const [full_name, setFull_name] = useState("");
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessage] = useState("");
+  const [totalMessages, setTotalMessages] = useState([]);
   //const [notification, setNotification] = useState("");
 
   useEffect(() => {
     messageServices.getAll().then(response => {
-      setMessages(response);
+      setTotalMessages(response);
     });
-  }, []);
+  }, [totalMessages]);
 
   const addMessage = newMessage => {
-    newMessage.id = (Math.random() * 10000).toFixed(0);
     messageServices.create(newMessage);
-    setMessages(messages.concat(newMessage));
+    setTotalMessages(totalMessages.concat(newMessage));
     setNotification(`Thank you ${newMessage.full_name} for message!`);
     setTimeout(() => {
       setNotification(null);
@@ -25,11 +24,8 @@ const SendMessage = ({ setNotification }) => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    addMessage({
-      full_name,
-      email,
-      message
-    });
+    console.log("message sent");
+    addMessage({ full_name, email, messages });
   };
 
   return (
@@ -71,8 +67,8 @@ const SendMessage = ({ setNotification }) => {
                 <div className="md-form">
                   <textarea
                     className="form-control md-textarea"
-                    name="message"
-                    value={message}
+                    name="messages"
+                    value={messages}
                     type="text"
                     placeholder="your message to me"
                     onChange={e => setMessage(e.target.value)}

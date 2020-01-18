@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import "../../src/index.css";
+import "../../index.css";
 const CreateNewPortfolio = props => {
- 
-
   const handleSubmit = e => {
     e.preventDefault();
     props.addNew();
@@ -12,7 +10,7 @@ const CreateNewPortfolio = props => {
 
   return (
     <div className="container">
-      <h2>Add More Projects</h2>
+      <h2>Add More Projects to Your Portfolio</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <input
@@ -65,7 +63,7 @@ const CreateNewPortfolio = props => {
           />
         </div>
 
-        <button className="btn btn-primary">Create</button>
+        <button className="btn btn-primary">Add To Portfolio</button>
       </form>
     </div>
   );

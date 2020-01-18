@@ -1,7 +1,6 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 const PortfolioDescription = ({ portfolio }) => {
-  console.log("from portfolio ", portfolio.content);
   return (
     <div className="container">
       <h2>{portfolio.content}</h2>
