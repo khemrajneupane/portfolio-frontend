@@ -1,16 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 import "../../index.css";
 const CreateNewWorkExperience = props => {
-  /*
-  const [job_title, setJob_title] = useState("");
-  const [company, setCompany] = useState("");
-
-  const [start_date, setStart_date] = useState("");
-  const [end_date, setEnd_date] = useState("");
-  const [responsibilities, setResponsibilities] = useState("");
-  const [rating, setRating] = useState("");*/
-
   const handleSubmit = e => {
     e.preventDefault();
     props.addNewWork();

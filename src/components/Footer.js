@@ -3,14 +3,7 @@ import "../../src/index.css";
 import SendMessage from "../components/messages/SendMessage";
 import GoogleMaps from "./GoogleMap";
 
-const styles = {
-  height: "100%",
-  width: "100%",
-  border: "5px solid lightgrey",
-  marginBottom: "10px",
-  backgroundColor: "#f0edeb"
-};
-const Footer = ({ setNotification }) => {
+const Footer = () => {
   const thisUser = window.localStorage.getItem("loggedUser");
   const thisUserName = JSON.parse(thisUser).username;
 
@@ -121,11 +114,7 @@ const Footer = ({ setNotification }) => {
 
           <hr />
           <div className="col-md-7 mx-auto">
-            {thisUserName ? (
-              <SendMessage setNotification={setNotification} />
-            ) : (
-              false
-            )}
+            {thisUserName ? <SendMessage /> : false}
           </div>
         </div>
       </div>

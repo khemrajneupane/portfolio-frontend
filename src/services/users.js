@@ -1,9 +1,10 @@
 import axios from "axios";
-const baseUrl = "http://localhost:3001/api/users";
+const baseUrl = "http://localhost:3001/api/users"; //locally
+//const baseUrl = "/api/users"; //deploy
 
-const getAll = () => {
-  const request = axios.get(baseUrl);
-  return request.then(response => response.data);
+const getAll = async () => {
+  const request = await axios.get(baseUrl);
+  return request.data;
 };
 
 export default { getAll };

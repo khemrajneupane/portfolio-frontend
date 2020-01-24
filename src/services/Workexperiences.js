@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = "http://localhost:3001/api/experiences";
+const baseUrl = "http://localhost:3001/api/experiences"; //locally
+//const baseUrl = "/api/experiences"; //deploy
 let token = null;
 
 const setToken = newToken => {
@@ -22,9 +23,11 @@ const update = (id, newObject) => {
   const request = axios.put(`${baseUrl}/${id}`, newObject);
   return request.then(response => response.data);
 };
-const deleteList = personId => {
-  const request = axios.delete(`${baseUrl}/${personId}`);
-  return request.then(response => response.data);
+const deleteList = (experienceId, token) => {
+  const config = {
+    headers: { Authorization: `bearer ${token}` }
+  };
+  const request = axios.delete(`${baseUrl}/${experienceId}`, config);
+  return request;
 };
-
 export default { getAll, create, update, deleteList, setToken };

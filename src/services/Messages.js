@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = "http://localhost:3001/api/messages";
+const baseUrl = "http://localhost:3001/api/messages"; //locally
+//const baseUrl = "/api/messages"; //deploy
 
 const getAll = () => {
   const request = axios.get(baseUrl);

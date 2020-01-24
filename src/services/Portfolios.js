@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = "http://localhost:3001/api/portfolios";
+const baseUrl = "http://localhost:3001/api/portfolios"; //locally
+//const baseUrl = "/api/portfolios"; //deploy
 let token = null;
 
 const setToken = newToken => {

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   GoogleMap,
   withScriptjs,
@@ -6,12 +7,15 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps";
+
 const mapStyles = {
   width: "100%",
   height: "100%"
 };
+
 const Map = () => {
   const [info, setInfo] = useState(null);
+
   return (
     <GoogleMap
       defaultZoom={7}
@@ -43,7 +47,7 @@ const WrappedMap = withScriptjs(withGoogleMap(Map));
 const GoogleMaps = () => (
   <div style={mapStyles}>
     <WrappedMap
-      googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyBd_vWEUxG7BSwxFbGCkVYS5qlcGdZdXgs`}
+      googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_API_KEY}`}
       loadingElement={<div style={{ height: `10%` }} />}
       containerElement={<div style={{ height: `200px` }} />}
       mapElement={<div style={{ height: `100%` }} />}

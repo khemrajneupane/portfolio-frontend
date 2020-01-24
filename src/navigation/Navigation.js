@@ -13,9 +13,9 @@ import Hobbies from "../components/Hobbies";
 import WithRouterCreateWorkExperience from "../components/experiences/CreateNewWorkExperience";
 import WorkExperienceList from "../components/experiences/WorkExperienceList";
 import { MenuItem } from "@material-ui/core";
-import { Button, Navbar, Nav, NavItem, NavDropdown } from "react-bootstrap";
-import LoginForm from "../components/LoginForm";
-//import LogOut from "../components/Logout";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import Colleges from "../components/Colleges";
+
 const HeaderLink = () => {
   const styles = {
     height: 90,
@@ -53,6 +53,9 @@ const HeaderLink = () => {
           </Link>
           <Link className="navbar-brand" to="/workexperience">
             Experiences
+          </Link>
+          <Link className="navbar-brand" to="/colleges">
+            Colleges
           </Link>
           <Link className="navbar-brand" to="/cv">
             CV
@@ -102,48 +105,42 @@ const Navigation = props => {
 
   const conditionalRender = () => {
     if (page === "/") {
-      return (<About />), (<Footer setNotification={props.setNotification} />);
+      return (<About />), (<Footer />);
     } else if (page === "create") {
-      return (
-        (<WithRouterCreate />),
-        (<Footer setNotification={props.setNotification} />)
-      );
+      return (<WithRouterCreate />), (<Footer />);
     } else if (page === "portfolio") {
       return (
         (
           <PortfolioList
             portfolio={props.portfolio}
             deleteList={props.deleteList}
+            allusers={props.allusers}
           />
         ),
-        (<Footer setNotification={props.setNotification} />)
+        (<Footer />)
       );
     } else if (page === "cv") {
-      return (
-        (<CurriculumVitae />),
-        (<Footer setNotification={props.setNotification} />)
-      );
+      return (<CurriculumVitae />), (<Footer />);
     } else if (page === "hobbies") {
-      return (
-        (<Hobbies />), (<Footer setNotification={props.setNotification} />)
-      );
+      return (<Hobbies />), (<Footer />);
     } else if (page === "workexperience") {
       return (
-        (<WorkExperienceList />),
-        (<Footer setNotification={props.setNotification} />)
+        (
+          <WorkExperienceList
+            workexperience={props.workexperience}
+            deleteExperience={props.deleteExperience}
+            allusers={props.allusers}
+          />
+        ),
+        (<Footer />)
       );
+    } else if (page === "colleges") {
+      return (<Colleges />), (<Footer />);
     }
   };
 
   const portfolioById = id => props.portfolio.find(a => a.id === id);
   const workExperienceById = id => props.workexperience.find(a => a.id === id);
-  const styles = {
-    height: "100%",
-    width: "100%",
-    border: "15px solid lightgrey",
-    marginBottom: "100px",
-    backgroundColor: "#f0edeb"
-  };
 
   return (
     <div>
@@ -160,6 +157,7 @@ const Navigation = props => {
               <PortfolioList
                 portfolio={props.portfolio}
                 deleteList={props.deleteList}
+                allusers={props.allusers}
               />
             )}
           />
@@ -176,7 +174,11 @@ const Navigation = props => {
             exact
             path="/workexperience"
             render={() => (
-              <WorkExperienceList workexperience={props.workexperience} />
+              <WorkExperienceList
+                workexperience={props.workexperience}
+                deleteExperience={props.deleteExperience}
+                allusers={props.allusers}
+              />
             )}
           />
           <Route
@@ -233,6 +235,7 @@ const Navigation = props => {
           <Route exact path="/hobbies" render={() => <Hobbies />} />
           <Route exact path="/cv" render={() => <CurriculumVitae />} />
           <Route exact path="/logout" />
+          <Route exact path="/colleges" render={() => <Colleges />} />
         </div>
       </Router>
 

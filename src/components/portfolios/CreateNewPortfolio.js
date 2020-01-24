@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 import "../../index.css";
+
+import "react-toastify/dist/ReactToastify.css";
+
 const CreateNewPortfolio = props => {
   const handleSubmit = e => {
     e.preventDefault();
@@ -11,6 +14,7 @@ const CreateNewPortfolio = props => {
   return (
     <div className="container">
       <h2>Add More Projects to Your Portfolio</h2>
+
       <form onSubmit={handleSubmit}>
         <div>
           <input

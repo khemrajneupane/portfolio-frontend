@@ -1,14 +1,13 @@
 import React from "react";
 import LoginForm from "./LoginForm";
+import { Button } from "@material-ui/core";
 
 const logout = () => window.localStorage.removeItem("loggedUser");
-/*? window.location.reload(true)
-    : window.location.reload(false);*/
 
 const LogOut = () => {
   return (
     <div>
-      <button onClick={() => logout()}>Logout</button>
+      <Button onClick={() => logout()}>Logout</Button>
       <LoginForm />
     </div>
   );

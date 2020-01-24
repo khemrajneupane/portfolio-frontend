@@ -1,5 +1,6 @@
 import React from "react";
 import "../../src/index.css";
+
 const styles = {
   backgroundColor: "#f0edeb"
 };

@@ -7,8 +7,10 @@ import Notification from "./components/Notification";
 
 import loginService from "./services/login";
 import LoginForm from "./components/LoginForm";
+import userServices from "./services/users";
 
-//import messageServices from "./services/Messages";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const [portfolio, setPortfolio] = useState([]);
@@ -31,6 +33,7 @@ const App = () => {
   const [end_date, setEnd_date] = useState("");
   const [responsibilities, setResponsibilities] = useState("");
   const [rating, setRating] = useState("");
+  const [allusers, setAllusers] = useState([]);
 
   //window.localStorage.clear();
 
@@ -95,6 +98,12 @@ const App = () => {
     }
   }, []);
 
+  useEffect(() => {
+    userServices.getAll().then(response => {
+      setAllusers(response);
+    });
+  }, []);
+
   const handleUsernameChange = event => {
     setUsername(event.target.value);
   };
@@ -115,16 +124,17 @@ const App = () => {
     try {
       await portfolioServices.create(newObject, user.token);
       setPortfolio(portfolio.concat(newObject));
-      setNotification(
-        `a new blog ${newObject.info} by ${newObject.technology} added `
+      toast.success(
+        `a new blog ${newObject.info} by ${newObject.technology} added `,
+        {
+          position: toast.POSITION.TOP_LEFT
+        }
       );
-      setTimeout(() => {
-        setNotification(null);
-      }, 5000);
-      //setTitle("");
-      //setAuthor("");
-      //setUrl("");
-      //setLikes("");
+      setContent("");
+      settechnology("");
+      setInfo("");
+      setType("");
+      setVotes("");
     } catch (error) {
       setNotification(error.message);
       setTimeout(() => {
@@ -145,16 +155,19 @@ const App = () => {
     try {
       await workexperienceServices.create(newWork, user.token);
       setWorkexperience(workexperience.concat(newWork));
-
-      setNotification(`a new work experience ${newWork.job_title} created!`);
-      setTimeout(() => {
-        setNotification(null);
-      }, 5000);
+      toast.success(`a new work experience ${newWork.job_title} created!`, {
+        position: toast.POSITION.TOP_LEFT
+      });
+      setJob_title("");
+      setCompany("");
+      setStart_date("");
+      setEnd_date("");
+      setResponsibilities("");
+      setRating("");
     } catch (error) {
-      setNotification(error.message);
-      setTimeout(() => {
-        setNotification(null);
-      }, 5000);
+      toast.success(error.message, {
+        position: toast.POSITION.TOP_LEFT
+      });
     }
   };
 
@@ -174,106 +187,136 @@ const App = () => {
       setUser(user);
       setUsername(username);
       setPassword("");
-      setNotification(`Welcome ${username}!`);
-      setTimeout(() => {
-        setNotification(null);
-      }, 5000);
+      toast.success(`Welcome ${username}!`, {
+        position: toast.POSITION.TOP_LEFT
+      });
     } catch (exception) {
-      setNotification("Wrong credentials");
-      setTimeout(() => {
-        setNotification(null);
-      }, 5000);
+      toast.success(
+        `Username- ${username} & Password- ${password}' are wrong credentials!`,
+        {
+          position: toast.POSITION.TOP_LEFT
+        }
+      );
     }
   };
-  /**Delete Function */
+  /**Delete Portfolio Function */
   const deleteList = async item => {
     const { id, content } = item;
     let r = window.confirm(`delete ${content} ?`);
     if (r === true) {
       try {
         await portfolioServices.deleteList(id, user.token);
-        setNotification(
-          `Information of ${content} has been removed from the server.`
+        toast.success(
+          `Information of ${content} has been removed from the server.`,
+          {
+            position: toast.POSITION.TOP_LEFT
+          }
         );
-        setTimeout(() => {
-          setNotification(null);
-        }, 5000);
-        //setItemObj({});
       } catch (error) {
         setPortfolio(portfolio);
-        setNotification(
+        toast.success(
           `You have no permission to delete ${content} from the server.
-            Please refresh the page and try again!`
+            Please refresh the page and try again!`,
+          {
+            position: toast.POSITION.TOP_LEFT
+          }
         );
-        setTimeout(() => {
-          setNotification(null);
-        }, 5000);
+      }
+      setPortfolio(portfolio.filter(p => p.id !== id));
+    } else if (r === false) {
+      toast.success(`You did not cancel ${content}'s entry`, {
+        position: toast.POSITION.TOP_RIGHT
+      });
+      return;
+    }
+  };
+  /**Delete Experience Function */
+  const deleteExperience = async item => {
+    const { id, job_title } = item;
+    let r = window.confirm(`delete ${job_title} job?`);
+    if (r === true) {
+      try {
+        await workexperienceServices.deleteList(id, user.token);
+        toast.success(
+          `Your ${job_title}´s job has been removed from the server.`,
+          {
+            position: toast.POSITION.TOP_LEFT
+          }
+        );
+      } catch (error) {
+        setWorkexperience(workexperience);
+        toast.success(
+          `You have no permission to delete ${content} from the server.`,
+          {
+            position: toast.POSITION.TOP_LEFT
+          }
+        );
       }
 
-      setPortfolio(portfolio.filter(p => p.id !== id));
-      setNotification(`${content}'s entry has been erased`);
-      setTimeout(() => {
-        setNotification(null);
-      }, 5000);
+      setWorkexperience(workexperience.filter(p => p.id !== id));
     } else if (r === false) {
-      setNotification(`You did not cancel ${content}'s entry`);
-      setTimeout(() => {
-        setNotification(null);
-      }, 5000);
+      toast.success(`You did not cancel ${job_title}'s job`, {
+        position: toast.POSITION.TOP_LEFT
+      });
       return;
     }
   };
 
   return (
     <div>
-      <Notification notification={notification} />
-      {user === null ? (
-        <div className="container">
-          <LoginForm
-            onSubmit={handleLogin}
-            handleUsernameChange={handleUsernameChange}
-            handlePasswordChange={handlePasswordChange}
-            username={username}
-            password={password}
-          />
-        </div>
-      ) : (
-        <div>
-          <Navigation
-            portfolio={portfolio}
-            setNotification={setNotification}
-            setPortfolio={setPortfolio}
-            workexperience={workexperience}
-            setWorkexperience={setWorkexperience}
-            addNew={addNew}
-            handleContentChange={handleContentChange}
-            handleTechnologyChange={handleTechnologyChange}
-            handleInfoChange={handleInfoChange}
-            handleTypeChange={handleTypeChange}
-            handleVotesChange={handleVotesChange}
-            content={content}
-            technology={technology}
-            info={info}
-            type={type}
-            votes={votes}
-            deleteList={deleteList}
-            user={user}
-            addNewWork={addNewWork}
-            job_title={job_title}
-            company={company}
-            start_date={start_date}
-            end_date={end_date}
-            responsibilities={responsibilities}
-            rating={rating}
-            handleJob_titleChange={handleJob_titleChange}
-            handleCompanyChange={handleCompanyChange}
-            handleStart_dateChange={handleStart_dateChange}
-            handleEnd_dateChange={handleEnd_dateChange}
-            handleResponsibilityChange={handleResponsibilityChange}
-            handleRatingChange={handleRatingChange}
-          />
-        </div>
-      )}
+      <div>
+        <Notification notification={notification} />
+        {user === null ? (
+          <div className="container">
+            <LoginForm
+              onSubmit={handleLogin}
+              handleUsernameChange={handleUsernameChange}
+              handlePasswordChange={handlePasswordChange}
+              username={username}
+              password={password}
+            />
+          </div>
+        ) : (
+          <div>
+            <Navigation
+              portfolio={portfolio}
+              setNotification={setNotification}
+              setPortfolio={setPortfolio}
+              setWorkexperience={setWorkexperience}
+              addNew={addNew}
+              handleContentChange={handleContentChange}
+              handleTechnologyChange={handleTechnologyChange}
+              handleInfoChange={handleInfoChange}
+              handleTypeChange={handleTypeChange}
+              handleVotesChange={handleVotesChange}
+              content={content}
+              technology={technology}
+              info={info}
+              type={type}
+              votes={votes}
+              deleteList={deleteList}
+              user={user}
+              addNewWork={addNewWork}
+              job_title={job_title}
+              company={company}
+              start_date={start_date}
+              end_date={end_date}
+              responsibilities={responsibilities}
+              rating={rating}
+              handleJob_titleChange={handleJob_titleChange}
+              handleCompanyChange={handleCompanyChange}
+              handleStart_dateChange={handleStart_dateChange}
+              handleEnd_dateChange={handleEnd_dateChange}
+              handleResponsibilityChange={handleResponsibilityChange}
+              handleRatingChange={handleRatingChange}
+              workexperience={workexperience}
+              deleteExperience={deleteExperience}
+              allusers={allusers}
+            />
+          </div>
+        )}
+        <ToastContainer autoClose={2000} />
+      </div>
     </div>
   );
 };
