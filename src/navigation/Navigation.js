@@ -45,30 +45,31 @@ const HeaderLink = () => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Link className="navbar-brand" to="/">
+          <Link id = "me" className="navbar-brand" to="/">
             About Me
           </Link>
-          <Link className="navbar-brand" to="/portfolio">
+          <Link id="projects" className="navbar-brand" to="/portfolio">
             Projects
           </Link>
-          <Link className="navbar-brand" to="/workexperience">
+          <Link id="experiences" className="navbar-brand" to="/workexperience">
             Experiences
           </Link>
-          <Link className="navbar-brand" to="/colleges">
+          <Link id="colleges" className="navbar-brand" to="/colleges">
             Colleges
           </Link>
-          <Link className="navbar-brand" to="/cv">
+          <Link id="cv" className="navbar-brand" to="/cv">
             CV
           </Link>
-          <Link className="navbar-brand" to="/hobbies">
+          <Link id="hobbies" className="navbar-brand" to="/hobbies">
             Hobbies
           </Link>
           <NavDropdown title="Add" id="collasible-nav-dropdown">
+            
             <MenuItem>
-              <Link to="/createjobs">Experiences</Link>
+              <Link id="add-experience" to="/createjobs">Experiences</Link>
             </MenuItem>
             <MenuItem>
-              <Link to="/create">Projects</Link>
+              <Link id="add-project" to="/create">Projects</Link>
             </MenuItem>
 
             <NavDropdown.Divider />
@@ -86,7 +87,7 @@ const HeaderLink = () => {
           </Link>
         </Nav>
         <Nav className="mr-auto">
-          <Link className="navbar-brand" to="/logout" onClick={() => LogOut()}>
+          <Link id="logout" className="navbar-brand" to="/logout" onClick={() => LogOut()}>
             Logout
           </Link>
         </Nav>

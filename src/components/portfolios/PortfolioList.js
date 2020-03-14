@@ -30,54 +30,36 @@ const PortfolioList = ({ portfolio, deleteList, allusers }) => {
           </tr>
           {portfolio.map(list => {
             const isLogged = allUsrs.indexOf(list.user);
+            //const isLogged = list.user.username.indexOf(props.user) > -1
+            //console.log("isLogged ", list.username)
             return (
               <tr key={list.id}>
                 <th>{list.technology}</th>
-                <td>
+                <td id={`desc_${list.id}`}>
                   <Link key={list.id} to={`/portfolio/${list.id}`}>
                     {list.content}{" "}
                   </Link>
                 </td>
-
+                 
                 <td>
-                  {isLogged ? (
-                    <Tooltip
+                  
+                     <Tooltip
                       arrow={true}
                       placement="bottom-start"
-                      title="You can delete this because you added this item"
+                      title="Delete?"
                     >
+                   
                       <IconButton
+                      id={`del_${list.id}`}
                         aria-label="delete"
                         color="primary"
                         onClick={() => deleteList(list)}
                       >
                         <DeleteIcon fontSize="large" />
                       </IconButton>
+                      
                     </Tooltip>
-                  ) : (
-                    <Tooltip
-                      arrow={true}
-                      placement="bottom-start"
-                      title="Not your item, cannot delete this"
-                    >
-                      <IconButton
-                        aria-label="delete"
-                        color="secondary"
-                        onClick={() => {
-                          toast.success(
-                            `${thisUserName.toUpperCase()}, ${
-                              list.type
-                            } with link- ${list.info} is NOT your item.`,
-                            {
-                              position: toast.POSITION.TOP_RIGHT
-                            }
-                          );
-                        }}
-                      >
-                        <DeleteIcon fontSize="large" />
-                      </IconButton>
-                    </Tooltip>
-                  )}
+               
                 </td>
               </tr>
             );

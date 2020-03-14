@@ -18,6 +18,7 @@ const CreateNewPortfolio = props => {
       <form onSubmit={handleSubmit}>
         <div>
           <input
+            id="project-name"
             className="form-control"
             name="content"
             value={props.content}
@@ -28,6 +29,7 @@ const CreateNewPortfolio = props => {
         </div>
         <div>
           <input
+            id="technology-name"
             className="form-control"
             name="technology"
             value={props.technology}
@@ -38,6 +40,7 @@ const CreateNewPortfolio = props => {
         </div>
         <div>
           <input
+            id="project-url"
             className="form-control"
             name="info"
             value={props.info}
@@ -48,6 +51,7 @@ const CreateNewPortfolio = props => {
         </div>
         <div>
           <input
+            id="project-type"
             className="form-control"
             name="type"
             value={props.type}
@@ -58,6 +62,7 @@ const CreateNewPortfolio = props => {
         </div>
         <div>
           <input
+            id="project-rate"
             className="form-control"
             name="votes"
             value={props.votes}
@@ -67,7 +72,7 @@ const CreateNewPortfolio = props => {
           />
         </div>
 
-        <button className="btn btn-primary">Add To Portfolio</button>
+        <button id="project-btn" className="btn btn-primary">Add To Portfolio</button>
       </form>
     </div>
   );

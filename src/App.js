@@ -8,9 +8,10 @@ import Notification from "./components/Notification";
 import loginService from "./services/login";
 import LoginForm from "./components/LoginForm";
 import userServices from "./services/users";
-
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SignupForm from "./components/SignupForm";
 
 const App = () => {
   const [portfolio, setPortfolio] = useState([]);
@@ -20,7 +21,7 @@ const App = () => {
 
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
-
+  const [value, setValue]= useState(false);
   const [content, setContent] = useState("");
   const [technology, settechnology] = useState("");
   const [info, setInfo] = useState("");
@@ -34,6 +35,8 @@ const App = () => {
   const [responsibilities, setResponsibilities] = useState("");
   const [rating, setRating] = useState("");
   const [allusers, setAllusers] = useState([]);
+  const [name,setName] = useState("")
+  const [email,setEmail] = useState("")
 
   //window.localStorage.clear();
 
@@ -73,7 +76,11 @@ const App = () => {
   const handleVotesChange = event => {
     setVotes(event.target.value);
   };
-
+const changeValue = ()=>{
+  
+  setValue(true)
+}
+//console.log("value: ", value)
   useEffect(() => {
     portfolioServices.getAll().then(response => {
       setPortfolio(response);
@@ -102,7 +109,7 @@ const App = () => {
     userServices.getAll().then(response => {
       setAllusers(response);
     });
-  }, []);
+  }, [allusers]);
 
   const handleUsernameChange = event => {
     setUsername(event.target.value);
@@ -110,6 +117,15 @@ const App = () => {
   const handlePasswordChange = event => {
     setPassword(event.target.value);
   };
+
+
+  const handleFullnameChange = event => {
+    setName(event.target.value);
+  }; 
+  const handleEmailChange = event => {
+    setEmail(event.target.value);
+  };
+  
 
   /**add new portfolio */
   const addNew = async () => {
@@ -125,7 +141,7 @@ const App = () => {
       await portfolioServices.create(newObject, user.token);
       setPortfolio(portfolio.concat(newObject));
       toast.success(
-        `a new blog ${newObject.info} by ${newObject.technology} added `,
+        `A new project in ${(newObject.technology).toUpperCase()} technology is just added `,
         {
           position: toast.POSITION.TOP_LEFT
         }
@@ -155,9 +171,10 @@ const App = () => {
     try {
       await workexperienceServices.create(newWork, user.token);
       setWorkexperience(workexperience.concat(newWork));
-      toast.success(`a new work experience ${newWork.job_title} created!`, {
+      toast.success(`a new work experience ${(newWork.job_title).toUpperCase()} is just created`, {
         position: toast.POSITION.TOP_LEFT
       });
+     
       setJob_title("");
       setCompany("");
       setStart_date("");
@@ -165,11 +182,73 @@ const App = () => {
       setResponsibilities("");
       setRating("");
     } catch (error) {
+   
       toast.success(error.message, {
         position: toast.POSITION.TOP_LEFT
       });
     }
   };
+
+
+    /**handle SignUp function */
+  const handleSignup = async (event) => {
+    event.preventDefault()
+    const newObject = {
+      username,
+      name,
+      password,
+      email
+    };
+
+    try {
+      if(!name || !email || !username || !password){
+           toast.success(
+      `All fields are required! `,
+      {
+        position: toast.POSITION.TOP_RIGHT
+      }
+    );        
+ 
+      }else{
+    const allUsers= allusers.map(u=>u.username)
+     const allEmail= allusers.map(u=>u.email)
+           console.log(allEmail)
+     if(allUsers.indexOf(newObject.username) > -1 ){
+           toast.success(
+      `This username- '${(newObject.username).toUpperCase()}', is already taken `,
+      {
+        position: toast.POSITION.TOP_RIGHT
+      }
+    );
+     }else if(allEmail.indexOf(newObject.email) > -1 ){
+
+     
+         toast.success(
+      `This email- '${(newObject.email)}', is already taken `,
+      {
+        position: toast.POSITION.TOP_RIGHT
+      }
+    );
+     }else{
+      await userServices.createUser(newObject);
+       setValue(false)
+      toast.success(
+      `Congrats ${(newObject.username).toUpperCase()}! Your account is created and ready to login `,
+      {
+        position: toast.POSITION.TOP_RIGHT
+      }
+    );
+
+     }
+      }
+    } catch (error) {
+      setNotification(error.message);
+      setTimeout(() => {
+        setNotification(null);
+      }, 5000);
+    }
+  };
+
 
   /**handle login function */
   const handleLogin = async event => {
@@ -181,7 +260,7 @@ const App = () => {
       });
 
       window.localStorage.setItem("loggedUser", JSON.stringify(user));
-
+console.log("from login", allusers)
       portfolioServices.setToken(user.token);
       workexperienceServices.setToken(user.token);
       setUser(user);
@@ -192,13 +271,15 @@ const App = () => {
       });
     } catch (exception) {
       toast.success(
-        `Username- ${username} & Password- ${password}' are wrong credentials!`,
+       `Username- ${username} & Password- ${password}' are wrong credentials!`,
+       {containerId: 'A'},
         {
           position: toast.POSITION.TOP_LEFT
         }
       );
     }
   };
+
   /**Delete Portfolio Function */
   const deleteList = async item => {
     const { id, content } = item;
@@ -268,14 +349,34 @@ const App = () => {
         <Notification notification={notification} />
         {user === null ? (
           <div className="container">
-            <LoginForm
+
+            
+            {value===false?(<LoginForm
               onSubmit={handleLogin}
               handleUsernameChange={handleUsernameChange}
               handlePasswordChange={handlePasswordChange}
               username={username}
               password={password}
-            />
-          </div>
+              changeValue={changeValue}
+            />): (
+            <div className="container">
+             <Route exact path="/signup" render={() => 
+               <SignupForm               
+               onSubmit={handleSignup}
+               handleUsernameChange={handleUsernameChange}
+               handlePasswordChange={handlePasswordChange}
+               handleEmailChange={handleEmailChange}
+               handleFullnameChange={handleFullnameChange}
+               username={username}
+               password={password}
+               fullname={name}
+               email={email}
+               /> 
+             } 
+             />
+             </div>
+           )}  
+            </div>
         ) : (
           <div>
             <Navigation
@@ -315,7 +416,7 @@ const App = () => {
             />
           </div>
         )}
-        <ToastContainer autoClose={2000} />
+        <ToastContainer autoClose={3000} />
       </div>
     </div>
   );

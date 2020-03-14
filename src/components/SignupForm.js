@@ -3,9 +3,8 @@ import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 
-import { Button, Typography } from "@material-ui/core";
+import { Button, Typography} from "@material-ui/core";
 import FilledInput from "@material-ui/core/FilledInput";
-import {BrowserRouter, Link } from "react-router-dom";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -39,13 +38,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LoginForm = ({
+const SignupForm = ({
   onSubmit,
   handleUsernameChange,
   handlePasswordChange,
-  changeValue,
+  handleFullnameChange,
+  handleEmailChange,
   username,
-  password
+  password,
+  fullname,
+  email
 }) => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
@@ -68,9 +70,42 @@ const LoginForm = ({
     <div className={classes.root}>
       <div className={classes.marginCentered}>
         <Typography variant="h3" component="p">
-          Please login to the application
+          Create Account
         </Typography>
         <form onSubmit={onSubmit}>
+        <FormControl
+            className={clsx(classes.margin, classes.textField)}
+            variant="filled"
+          >
+            <InputLabel>Email</InputLabel>
+            <FilledInput
+              id="filled-adornment-email"
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              
+            />
+            <FormHelperText id="filled-weight-helper-text">
+              Type your valid email
+            </FormHelperText>
+          </FormControl>
+
+          <FormControl
+            className={clsx(classes.margin, classes.textField)}
+            variant="filled"
+          >
+            <InputLabel>Your Full Name</InputLabel>
+            <FilledInput
+              id="filled-adornment-name"
+              type="text"
+              value={fullname}
+              onChange={handleFullnameChange}
+            />
+            <FormHelperText id="filled-weight-helper-text">
+              Type your Full Name
+            </FormHelperText>
+          </FormControl>
+
           <FormControl
             className={clsx(classes.margin, classes.textField)}
             variant="filled"
@@ -83,7 +118,7 @@ const LoginForm = ({
               onChange={handleUsernameChange}
             />
             <FormHelperText id="filled-weight-helper-text">
-              Username is biansha
+              Type your username
             </FormHelperText>
           </FormControl>
           <FormControl
@@ -112,24 +147,21 @@ const LoginForm = ({
               }
             />
             <FormHelperText id="filled-weight-helper-text">
-              Password is biansha
+              Type your password
             </FormHelperText>
           </FormControl>
           <FormControl
             className={clsx(classes.root, classes.textField)}
             variant="filled"
           >
-            <Button id= 'login'type="submit" variant="contained">
-              Login
+            <Button id= 'signup'type="submit" variant="contained">
+              Signup 
             </Button>
           </FormControl>
         </form>
-        <Typography variant="h6" component="p">
-          If you are new to the application, please <Link onClick={()=>changeValue()} to="/signup" > click </Link> to signup.
-        </Typography>
-        
+            
       </div>
     </div>
   );
 };
-export default LoginForm;
+export default SignupForm;

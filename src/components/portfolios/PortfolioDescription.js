@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 const PortfolioDescription = ({ portfolio }) => {
   return (
     <div className="container">
@@ -10,7 +12,7 @@ const PortfolioDescription = ({ portfolio }) => {
           <tr className="bg-primary">
             <th>Application Type</th>
             <th>Technologies</th>
-            <th>URL/Deployment</th>
+            <th>URL</th>
             <th>Rate</th>
           </tr>
 
@@ -18,13 +20,19 @@ const PortfolioDescription = ({ portfolio }) => {
             <th>{portfolio.type}</th>
             <td>{portfolio.technology}</td>
 
-            <td>
+            <td id={portfolio.info.slice(8, 17)}>
               <a href={portfolio.info}>{portfolio.info}</a>
             </td>
             <td>{portfolio.votes}</td>
           </tr>
         </tbody>
       </Table>
+      <div>
+     
+           <Link to ="/portfolio"><ArrowBackIosIcon color='primary'/>BACK</Link>
+      
+      
+      </div>
     </div>
   );
 };

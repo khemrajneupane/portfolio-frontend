@@ -7,8 +7,8 @@ const logout = () => window.localStorage.removeItem("loggedUser");
 const LogOut = () => {
   return (
     <div>
-      <Button onClick={() => logout()}>Logout</Button>
-      <LoginForm />
+      <Button onClick={() => logout()}> /></Button>
+     
     </div>
   );
 };

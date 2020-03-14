@@ -19,7 +19,7 @@ const WorkExperienceList = ({ workexperience, deleteExperience, allusers }) => {
       <Typography
         align="center"
         text="textPrimary"
-      >{`Hi ${thisUserName.toUpperCase()}! You can only delete your experiences!`}</Typography>
+      >{`Hello ${thisUserName.toUpperCase()}!`}</Typography>
 
       <Table striped bordered hover varient="dark">
         <thead></thead>
@@ -34,17 +34,18 @@ const WorkExperienceList = ({ workexperience, deleteExperience, allusers }) => {
             return (
               <tr key={list.id}>
                 <th>{list.job_title}</th>
-                <td>
+                <td id={`company_${list.id}`}>
                   <Link to={`/workexperience/${list.id}`}>{list.company} </Link>
                 </td>
                 <td>
-                  {isLogged ? (
+                  
                     <Tooltip
                       arrow={true}
                       placement="bottom-start"
                       title="You can delete this because you added this item"
                     >
                       <IconButton
+                      id={`del_${list.id}`}
                         aria-label="delete"
                         color="primary"
                         onClick={() => deleteExperience(list)}
@@ -52,37 +53,14 @@ const WorkExperienceList = ({ workexperience, deleteExperience, allusers }) => {
                         <DeleteIcon fontSize="large" />
                       </IconButton>
                     </Tooltip>
-                  ) : (
-                    <Tooltip
-                      arrow={true}
-                      placement="bottom-start"
-                      title="Not your item, cannot delete this"
-                    >
-                      <IconButton
-                        aria-label="delete"
-                        color="secondary"
-                        onClick={() => {
-                          toast.success(
-                            `${thisUserName.toUpperCase()}, ${
-                              list.job_title
-                            } 's job in ${list.company} is NOT your job.`,
-                            {
-                              position: toast.POSITION.TOP_RIGHT
-                            }
-                          );
-                        }}
-                      >
-                        <DeleteIcon fontSize="large" />
-                      </IconButton>
-                    </Tooltip>
-                  )}
+                  
                 </td>
               </tr>
             );
           })}
         </tbody>
       </Table>
-      <ToastContainer autoClose={2000} />
+      
     </div>
   );
 };
