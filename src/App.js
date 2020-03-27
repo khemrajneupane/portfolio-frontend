@@ -21,7 +21,7 @@ const App = () => {
 
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
-  const [value, setValue]= useState(false);
+  const [value, setValue] = useState(false);
   const [content, setContent] = useState("");
   const [technology, settechnology] = useState("");
   const [info, setInfo] = useState("");
@@ -35,8 +35,8 @@ const App = () => {
   const [responsibilities, setResponsibilities] = useState("");
   const [rating, setRating] = useState("");
   const [allusers, setAllusers] = useState([]);
-  const [name,setName] = useState("")
-  const [email,setEmail] = useState("")
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   //window.localStorage.clear();
 
@@ -76,22 +76,29 @@ const App = () => {
   const handleVotesChange = event => {
     setVotes(event.target.value);
   };
-const changeValue = ()=>{
-  
-  setValue(true)
-}
-//console.log("value: ", value)
+  const changeValue = x => {
+    setValue(x);
+  };
+  //console.log("value: ", value)
   useEffect(() => {
     portfolioServices.getAll().then(response => {
       setPortfolio(response);
     });
   }, [portfolio]);
 
+  /**sorting the portfolios in descending order of votes/ratings */
+  portfolio.sort((a, b) => b.votes - a.votes);
+
   useEffect(() => {
     workexperienceServices.getAll().then(response => {
       setWorkexperience(response);
     });
   }, [workexperience]);
+
+  /**sorting the workexperience in descending order of start_date */
+  workexperience.sort(
+    (a, b) => b.start_date.slice(0, 4) - a.start_date.slice(0, 4)
+  );
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedUser");
@@ -118,14 +125,12 @@ const changeValue = ()=>{
     setPassword(event.target.value);
   };
 
-
   const handleFullnameChange = event => {
     setName(event.target.value);
-  }; 
+  };
   const handleEmailChange = event => {
     setEmail(event.target.value);
   };
-  
 
   /**add new portfolio */
   const addNew = async () => {
@@ -141,7 +146,7 @@ const changeValue = ()=>{
       await portfolioServices.create(newObject, user.token);
       setPortfolio(portfolio.concat(newObject));
       toast.success(
-        `A new project in ${(newObject.technology).toUpperCase()} technology is just added `,
+        `A new project in ${newObject.technology.toUpperCase()} technology is just added `,
         {
           position: toast.POSITION.TOP_LEFT
         }
@@ -171,10 +176,13 @@ const changeValue = ()=>{
     try {
       await workexperienceServices.create(newWork, user.token);
       setWorkexperience(workexperience.concat(newWork));
-      toast.success(`a new work experience ${(newWork.job_title).toUpperCase()} is just created`, {
-        position: toast.POSITION.TOP_LEFT
-      });
-     
+      toast.success(
+        `a new work experience ${newWork.job_title.toUpperCase()} is just created`,
+        {
+          position: toast.POSITION.TOP_LEFT
+        }
+      );
+
       setJob_title("");
       setCompany("");
       setStart_date("");
@@ -182,17 +190,15 @@ const changeValue = ()=>{
       setResponsibilities("");
       setRating("");
     } catch (error) {
-   
       toast.success(error.message, {
         position: toast.POSITION.TOP_LEFT
       });
     }
   };
 
-
-    /**handle SignUp function */
-  const handleSignup = async (event) => {
-    event.preventDefault()
+  /**handle SignUp function */
+  const handleSignup = async event => {
+    event.preventDefault();
     const newObject = {
       username,
       name,
@@ -201,45 +207,35 @@ const changeValue = ()=>{
     };
 
     try {
-      if(!name || !email || !username || !password){
-           toast.success(
-      `All fields are required! `,
-      {
-        position: toast.POSITION.TOP_RIGHT
-      }
-    );        
- 
-      }else{
-    const allUsers= allusers.map(u=>u.username)
-     const allEmail= allusers.map(u=>u.email)
-           console.log(allEmail)
-     if(allUsers.indexOf(newObject.username) > -1 ){
-           toast.success(
-      `This username- '${(newObject.username).toUpperCase()}', is already taken `,
-      {
-        position: toast.POSITION.TOP_RIGHT
-      }
-    );
-     }else if(allEmail.indexOf(newObject.email) > -1 ){
-
-     
-         toast.success(
-      `This email- '${(newObject.email)}', is already taken `,
-      {
-        position: toast.POSITION.TOP_RIGHT
-      }
-    );
-     }else{
-      await userServices.createUser(newObject);
-       setValue(false)
-      toast.success(
-      `Congrats ${(newObject.username).toUpperCase()}! Your account is created and ready to login `,
-      {
-        position: toast.POSITION.TOP_RIGHT
-      }
-    );
-
-     }
+      if (!name || !email || !username || !password) {
+        toast.success(`All fields are required! `, {
+          position: toast.POSITION.TOP_RIGHT
+        });
+      } else {
+        const allUsers = allusers.map(u => u.username);
+        const allEmail = allusers.map(u => u.email);
+        console.log(allEmail);
+        if (allUsers.indexOf(newObject.username) > -1) {
+          toast.success(
+            `This username- '${newObject.username.toUpperCase()}', is already taken `,
+            {
+              position: toast.POSITION.TOP_RIGHT
+            }
+          );
+        } else if (allEmail.indexOf(newObject.email) > -1) {
+          toast.success(`This email- '${newObject.email}', is already taken `, {
+            position: toast.POSITION.TOP_RIGHT
+          });
+        } else {
+          await userServices.createUser(newObject);
+          setValue(false);
+          toast.success(
+            `Congrats ${newObject.username.toUpperCase()}! Your account is created and ready to login `,
+            {
+              position: toast.POSITION.TOP_RIGHT
+            }
+          );
+        }
       }
     } catch (error) {
       setNotification(error.message);
@@ -248,7 +244,6 @@ const changeValue = ()=>{
       }, 5000);
     }
   };
-
 
   /**handle login function */
   const handleLogin = async event => {
@@ -260,7 +255,7 @@ const changeValue = ()=>{
       });
 
       window.localStorage.setItem("loggedUser", JSON.stringify(user));
-console.log("from login", allusers)
+      console.log("from login", allusers);
       portfolioServices.setToken(user.token);
       workexperienceServices.setToken(user.token);
       setUser(user);
@@ -271,8 +266,8 @@ console.log("from login", allusers)
       });
     } catch (exception) {
       toast.success(
-       `Username- ${username} & Password- ${password}' are wrong credentials!`,
-       {containerId: 'A'},
+        `Username- ${username} & Password- ${password}' are wrong credentials!`,
+        { containerId: "A" },
         {
           position: toast.POSITION.TOP_LEFT
         }
@@ -349,34 +344,38 @@ console.log("from login", allusers)
         <Notification notification={notification} />
         {user === null ? (
           <div className="container">
-
-            
-            {value===false?(<LoginForm
-              onSubmit={handleLogin}
-              handleUsernameChange={handleUsernameChange}
-              handlePasswordChange={handlePasswordChange}
-              username={username}
-              password={password}
-              changeValue={changeValue}
-            />): (
-            <div className="container">
-             <Route exact path="/signup" render={() => 
-               <SignupForm               
-               onSubmit={handleSignup}
-               handleUsernameChange={handleUsernameChange}
-               handlePasswordChange={handlePasswordChange}
-               handleEmailChange={handleEmailChange}
-               handleFullnameChange={handleFullnameChange}
-               username={username}
-               password={password}
-               fullname={name}
-               email={email}
-               /> 
-             } 
-             />
-             </div>
-           )}  
-            </div>
+            {value === false ? (
+              <LoginForm
+                onSubmit={handleLogin}
+                handleUsernameChange={handleUsernameChange}
+                handlePasswordChange={handlePasswordChange}
+                username={username}
+                password={password}
+                changeValue={changeValue}
+              />
+            ) : (
+              <div className="container">
+                <Route
+                  exact
+                  path="/signup"
+                  render={() => (
+                    <SignupForm
+                      onSubmit={handleSignup}
+                      handleUsernameChange={handleUsernameChange}
+                      handlePasswordChange={handlePasswordChange}
+                      handleEmailChange={handleEmailChange}
+                      handleFullnameChange={handleFullnameChange}
+                      username={username}
+                      password={password}
+                      fullname={name}
+                      email={email}
+                      changeValue={changeValue}
+                    />
+                  )}
+                />
+              </div>
+            )}
+          </div>
         ) : (
           <div>
             <Navigation

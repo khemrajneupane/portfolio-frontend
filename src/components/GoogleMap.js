@@ -10,7 +10,9 @@ import {
 
 const mapStyles = {
   width: "100%",
-  height: "100%"
+  height: "100%",
+  marginTop: "40px",
+  paddingBottom: "20px"
 };
 
 const Map = () => {
@@ -18,13 +20,13 @@ const Map = () => {
 
   return (
     <GoogleMap
-      defaultZoom={7}
+      defaultZoom={8}
       defaultCenter={{ lat: 60.287781, lng: 24.854378 }}
     >
       <Marker
         position={{ lat: 60.287781, lng: 24.854378 }}
         onClick={() => {
-          setInfo("My Home Town");
+          setInfo("Tammistonkatu 23");
         }}
       />
 

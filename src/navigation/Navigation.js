@@ -22,10 +22,12 @@ const HeaderLink = () => {
     width: 100,
     position: "relative"
   };
-  const LogOut = () =>
-    window.localStorage.removeItem("loggedUser")
-      ? window.location.reload(true)
-      : window.location.reload(false);
+
+  const LogOut = () => {
+    window.localStorage.removeItem("loggedUser");
+    window.location.reload("/login");
+  };
+
   return (
     <Navbar
       collapseOnSelect
@@ -45,7 +47,7 @@ const HeaderLink = () => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Link id = "me" className="navbar-brand" to="/">
+          <Link id="me" className="navbar-brand" to="/">
             About Me
           </Link>
           <Link id="projects" className="navbar-brand" to="/portfolio">
@@ -64,12 +66,15 @@ const HeaderLink = () => {
             Hobbies
           </Link>
           <NavDropdown title="Add" id="collasible-nav-dropdown">
-            
             <MenuItem>
-              <Link id="add-experience" to="/createjobs">Experiences</Link>
+              <Link id="add-experience" to="/createjobs">
+                Experiences
+              </Link>
             </MenuItem>
             <MenuItem>
-              <Link id="add-project" to="/create">Projects</Link>
+              <Link id="add-project" to="/create">
+                Projects
+              </Link>
             </MenuItem>
 
             <NavDropdown.Divider />
@@ -87,7 +92,12 @@ const HeaderLink = () => {
           </Link>
         </Nav>
         <Nav className="mr-auto">
-          <Link id="logout" className="navbar-brand" to="/logout" onClick={() => LogOut()}>
+          <Link
+            id="logout"
+            className="navbar-brand"
+            to="/login"
+            onClick={() => LogOut()}
+          >
             Logout
           </Link>
         </Nav>
@@ -235,7 +245,7 @@ const Navigation = props => {
 
           <Route exact path="/hobbies" render={() => <Hobbies />} />
           <Route exact path="/cv" render={() => <CurriculumVitae />} />
-          <Route exact path="/logout" />
+          <Route exact path="/login" />
           <Route exact path="/colleges" render={() => <Colleges />} />
         </div>
       </Router>

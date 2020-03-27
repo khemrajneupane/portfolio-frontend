@@ -38,29 +38,26 @@ const WorkExperienceList = ({ workexperience, deleteExperience, allusers }) => {
                   <Link to={`/workexperience/${list.id}`}>{list.company} </Link>
                 </td>
                 <td>
-                  
-                    <Tooltip
-                      arrow={true}
-                      placement="bottom-start"
-                      title="You can delete this because you added this item"
-                    >
-                      <IconButton
+                  <Tooltip
+                    arrow={true}
+                    placement="bottom-start"
+                    title={<Typography>Delete??</Typography>}
+                  >
+                    <IconButton
                       id={`del_${list.id}`}
-                        aria-label="delete"
-                        color="primary"
-                        onClick={() => deleteExperience(list)}
-                      >
-                        <DeleteIcon fontSize="large" />
-                      </IconButton>
-                    </Tooltip>
-                  
+                      aria-label="delete"
+                      color="primary"
+                      onClick={() => deleteExperience(list)}
+                    >
+                      <DeleteIcon fontSize="large" />
+                    </IconButton>
+                  </Tooltip>
                 </td>
               </tr>
             );
           })}
         </tbody>
       </Table>
-      
     </div>
   );
 };

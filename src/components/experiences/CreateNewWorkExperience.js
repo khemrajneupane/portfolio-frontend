@@ -14,7 +14,7 @@ const CreateNewWorkExperience = props => {
       <form onSubmit={handleSubmit}>
         <div>
           <input
-          id="job-title"
+            id="job-title"
             className="form-control"
             name="job_title"
             value={props.job_title}
@@ -81,7 +81,9 @@ const CreateNewWorkExperience = props => {
           />
         </div>
 
-        <button id="add-expn" className="btn btn-primary">Add Experiences</button>
+        <button id="add-expn" className="btn btn-primary">
+          Add Experiences
+        </button>
       </form>
     </div>
   );

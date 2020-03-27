@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 import { Button, Typography } from "@material-ui/core";
 import FilledInput from "@material-ui/core/FilledInput";
-import {BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -13,8 +13,6 @@ import FormControl from "@material-ui/core/FormControl";
 
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const useStyles = makeStyles(theme => ({
@@ -26,7 +24,9 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1)
   },
   withoutLabel: {
-    marginTop: theme.spacing(3)
+    marginTop: 0,
+    marginLeft: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   },
   textField: {
     width: 200
@@ -119,15 +119,24 @@ const LoginForm = ({
             className={clsx(classes.root, classes.textField)}
             variant="filled"
           >
-            <Button id= 'login'type="submit" variant="contained">
-              Login
+            <Button
+              className={classes.withoutLabel}
+              id="login"
+              type="submit"
+              variant="contained"
+            >
+              Sign in
             </Button>
           </FormControl>
         </form>
         <Typography variant="h6" component="p">
-          If you are new to the application, please <Link onClick={()=>changeValue()} to="/signup" > click </Link> to signup.
+          If you are new to the application, please{" "}
+          <Link onClick={() => changeValue(true)} to="/signup">
+            {" "}
+            click{" "}
+          </Link>{" "}
+          to signup.
         </Typography>
-        
       </div>
     </div>
   );

@@ -2,20 +2,15 @@ import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
-
-import { Button, Typography} from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import FilledInput from "@material-ui/core/FilledInput";
 import InputLabel from "@material-ui/core/InputLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
-
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
+import { Link } from "react-router-dom";
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
@@ -25,7 +20,9 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1)
   },
   withoutLabel: {
-    marginTop: theme.spacing(3)
+    marginTop: 0,
+    marginLeft: theme.spacing(1),
+    marginBottom: theme.spacing(1)
   },
   textField: {
     width: 200
@@ -47,7 +44,8 @@ const SignupForm = ({
   username,
   password,
   fullname,
-  email
+  email,
+  changeValue
 }) => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
@@ -73,7 +71,7 @@ const SignupForm = ({
           Create Account
         </Typography>
         <form onSubmit={onSubmit}>
-        <FormControl
+          <FormControl
             className={clsx(classes.margin, classes.textField)}
             variant="filled"
           >
@@ -83,7 +81,6 @@ const SignupForm = ({
               type="email"
               value={email}
               onChange={handleEmailChange}
-              
             />
             <FormHelperText id="filled-weight-helper-text">
               Type your valid email
@@ -105,6 +102,7 @@ const SignupForm = ({
               Type your Full Name
             </FormHelperText>
           </FormControl>
+          <br />
 
           <FormControl
             className={clsx(classes.margin, classes.textField)}
@@ -118,7 +116,7 @@ const SignupForm = ({
               onChange={handleUsernameChange}
             />
             <FormHelperText id="filled-weight-helper-text">
-              Type your username
+              Type a username, remember it.
             </FormHelperText>
           </FormControl>
           <FormControl
@@ -147,19 +145,33 @@ const SignupForm = ({
               }
             />
             <FormHelperText id="filled-weight-helper-text">
-              Type your password
+              Type a password, remember it.
             </FormHelperText>
           </FormControl>
           <FormControl
             className={clsx(classes.root, classes.textField)}
             variant="filled"
           >
-            <Button id= 'signup'type="submit" variant="contained">
-              Signup 
+            <Button
+              className={classes.withoutLabel}
+              id="signup"
+              type="submit"
+              variant="contained"
+            >
+              Sign up
             </Button>
           </FormControl>
         </form>
-            
+        <div className={classes.withoutLabel}>
+          <FormHelperText id="filled-weight-helper-text">
+            Already a member can
+          </FormHelperText>
+          <Link onClick={() => changeValue(false)} to="/login">
+            <Button id="signup" type="submit" variant="contained">
+              Sign in
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

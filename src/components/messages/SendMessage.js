@@ -35,10 +35,10 @@ const SendMessage = () => {
   };
 
   return (
-    <section className="mb-3">
+    <section className="mb-4">
       <div className="page-footer font-small stylish-color-dark pt-4"></div>
       <div className="row">
-        <div className="col-md-6 mb-md-0 mb-5">
+        <div className="col-md-12 mb-md-0 mb-5">
           <form id="contact-form" name="contact-form" onSubmit={handleSubmit}>
             <fieldset>
               <legend>Please Send Message</legend>
@@ -84,9 +84,7 @@ const SendMessage = () => {
                   </div>
                 </div>
               </div>
-              <div className="text-center text-md-left">
-                <button className="btn btn-primary">Send</button>
-              </div>
+              <button className="btn btn-primary">Send</button>
             </fieldset>
           </form>
         </div>

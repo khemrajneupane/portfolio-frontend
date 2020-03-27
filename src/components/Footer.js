@@ -8,19 +8,17 @@ const Footer = () => {
   const thisUserName = JSON.parse(thisUser).username;
 
   return (
-    <footer className="page-footer font-small stylish-color-dark pt-4">
-      <div className="container text-center text-md-left">
+    <footer className="jumbotron container page-footer font-small stylish-color-dark pt-4">
+      <div className="text-center text-md-left">
         <div className="row">
           <hr className="clearfix w-100 d-md-none" />
 
           <div className="col-md-2 mx-auto">
             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
 
-            <ul className="list-unstyled">
-              <li>
-                <a href="#!">Link 1</a>
-              </li>
-            </ul>
+            <a href="http://khem-portfolio.herokuapp.com/" target="blank">
+              My Portfolio
+            </a>
           </div>
 
           <hr className="clearfix w-100 d-md-none" />
@@ -28,36 +26,21 @@ const Footer = () => {
           <div className="col-md-2 mx-auto">
             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
 
-            <ul className="list-unstyled">
-              <li>
-                <a href="https://www.haaga-helia.fi/fi/etusivu" target="blank">
-                  <i className="fas fa-school"></i> School
-                </a>
-              </li>
-            </ul>
+            <a href="https://www.haaga-helia.fi/fi/etusivu" target="blank">
+              <i className="fas fa-school"></i> School
+            </a>
           </div>
-
-          <hr className="clearfix w-100 d-md-none" />
 
           <div className="col-md-2 mx-auto">
             <h5 className="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
 
-            <ul className="list-unstyled">
-              <li>
-                <a
-                  className="nav-link"
-                  href="http://myy.haaga-helia.fi/~a1800727/DigitalServiceTask/NepalFinlandAssignment/NepalAssignment/NepalWebsiteTemp/NepalWebsiteTemp.html"
-                  target="blank"
-                >
-                  Finland <i className="fas fa-link"></i> Nepal
-                </a>
-              </li>
-            </ul>
+            <a
+              href="http://myy.haaga-helia.fi/~a1800727/DigitalServiceTask/NepalFinlandAssignment/NepalAssignment/NepalWebsiteTemp/NepalWebsiteTemp.html"
+              target="blank"
+            >
+              Finland <i className="fas fa-link"></i> Nepal
+            </a>
           </div>
-
-          <hr />
-
-          <hr />
 
           <div className="col-md-4 mx-auto">
             <ul className="list-unstyled list-inline text-center">
@@ -88,32 +71,35 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="col-md-5 mx-auto">
+          <div className="col-md-12 mx-auto">
             <div>
               <GoogleMaps />
             </div>
-            <p>
+            <div>
               <i
                 className="fas fa-map-marker-alt fa-2x"
                 style={{ fontSize: 25, color: `red` }}
               ></i>
               Tammistonkatu 23, A5 Vantaa Finland
-            </p>
-
-            <p>
-              <i className="fas fa-phone mt-4 fa-2x "></i>
-              <a href="tel:+358443399988">+ 358443399988</a>
-
-              <i className="fas fa-envelope mt-4 fa-2x">
-                <a href="mailto:shekharneupane@gmail.com">
-                  shekharneupane@gmail.com
-                </a>
-              </i>
-            </p>
+            </div>
           </div>
 
           <hr />
-          <div className="col-md-7 mx-auto">
+
+          <div className="col-md-6 mx-auto">
+            <i className="fas fa-phone">
+              <a href="tel:+358443399988">{` +358443399988`}</a>
+            </i>
+          </div>
+          <div className="col-md-6 mx-auto">
+            <i className="fas fa-envelope">
+              <a href="mailto:khemrjneupane@gmail.com">
+                {` khemrjneupane@gmail.com`}
+              </a>{" "}
+            </i>
+          </div>
+
+          <div className="col-md-12 mx-auto" style={{ marginBottom: 20 }}>
             {thisUserName ? <SendMessage /> : false}
           </div>
         </div>

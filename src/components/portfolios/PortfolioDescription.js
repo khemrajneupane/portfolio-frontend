@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import Rating from "@material-ui/lab/Rating";
+import { Typography, Tooltip } from "@material-ui/core";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+
 const PortfolioDescription = ({ portfolio }) => {
   return (
     <div className="container">
@@ -23,15 +26,23 @@ const PortfolioDescription = ({ portfolio }) => {
             <td id={portfolio.info.slice(8, 17)}>
               <a href={portfolio.info}>{portfolio.info}</a>
             </td>
-            <td>{portfolio.votes}</td>
+            <td>
+              {<Rating name="read-only" value={portfolio.votes} readOnly />}
+            </td>
           </tr>
         </tbody>
       </Table>
-      <div>
-     
-           <Link to ="/portfolio"><ArrowBackIosIcon color='primary'/>BACK</Link>
-      
-      
+      <div className="container-flex">
+        <Tooltip
+          arrow={true}
+          placement="bottom-start"
+          title={<Typography>Previous page</Typography>}
+        >
+          <Link to="/portfolio">
+            {" "}
+            <ArrowBackIcon color="secondary" fontSize="large" />
+          </Link>
+        </Tooltip>
       </div>
     </div>
   );
