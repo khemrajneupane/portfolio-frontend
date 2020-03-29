@@ -2,7 +2,8 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Rating from "@material-ui/lab/Rating";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+
+import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import { Typography, Tooltip } from "@material-ui/core";
 const WorkExperienceDescription = ({ workexperience }) => {
   return (
@@ -38,17 +39,9 @@ const WorkExperienceDescription = ({ workexperience }) => {
           </tr>
         </tbody>
       </Table>
-      <div className="container-flex">
-        <Tooltip
-          arrow={true}
-          placement="bottom-start"
-          title={<Typography>Previous page</Typography>}
-        >
-          <Link to="/workexperience">
-            {" "}
-            <ArrowBackIcon color="secondary" fontSize="large" />
-          </Link>
-        </Tooltip>
+      <div>
+      <Link to ="/workexperience"><ArrowLeftIcon color='primary'/><ArrowLeftIcon color='secondary'/><ArrowLeftIcon color='danger'/></Link>
+      
       </div>
     </div>
   );

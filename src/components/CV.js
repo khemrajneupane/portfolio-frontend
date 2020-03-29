@@ -9,7 +9,7 @@ const CurriculumVitae = () => {
   };
   return (
     <div className="container flex-a">
-      <img style={styles} src={require("../assets/CV.png")} alt="cvimage" />
+      <img style={styles} src={require("../assets/CV.jpg")} alt="cvimage" />
     </div>
   );
 };

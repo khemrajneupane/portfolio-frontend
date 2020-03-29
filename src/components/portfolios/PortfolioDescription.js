@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import Rating from "@material-ui/lab/Rating";
 import { Typography, Tooltip } from "@material-ui/core";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
+import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 const PortfolioDescription = ({ portfolio }) => {
   return (
     <div className="container">
@@ -32,17 +32,10 @@ const PortfolioDescription = ({ portfolio }) => {
           </tr>
         </tbody>
       </Table>
-      <div className="container-flex">
-        <Tooltip
-          arrow={true}
-          placement="bottom-start"
-          title={<Typography>Previous page</Typography>}
-        >
-          <Link to="/portfolio">
-            {" "}
-            <ArrowBackIcon color="secondary" fontSize="large" />
-          </Link>
-        </Tooltip>
+      <div>
+     
+         <Link to ="/portfolio"><ArrowLeftIcon color='primary'/><ArrowLeftIcon color='secondary'/><ArrowLeftIcon color='danger'/></Link>
+      
       </div>
     </div>
   );

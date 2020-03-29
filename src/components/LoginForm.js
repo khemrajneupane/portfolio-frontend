@@ -14,11 +14,12 @@ import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import "react-toastify/dist/ReactToastify.css";
-
+import Flippy, { FrontSide, BackSide } from 'react-flippy';
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    margin:"0 auto"
   },
   margin: {
     margin: theme.spacing(1)
@@ -63,12 +64,21 @@ const LoginForm = ({
   const handleMouseDownPassword = event => {
     event.preventDefault();
   };
+  const styles={
+    flippy:{
+   
+    width: '90%',
+    marginLeft: '8px',
+    marginTop:'20px'
+    }
+  }
+
 
   return (
     <div className={classes.root}>
       <div className={classes.marginCentered}>
         <Typography variant="h3" component="p">
-          Please login to the application
+          Login to Portfolio App
         </Typography>
         <form onSubmit={onSubmit}>
           <FormControl
@@ -119,24 +129,36 @@ const LoginForm = ({
             className={clsx(classes.root, classes.textField)}
             variant="filled"
           >
-            <Button
-              className={classes.withoutLabel}
-              id="login"
-              type="submit"
-              variant="contained"
-            >
-              Sign in
+         
+            <Button id= 'login' type="submit" variant="contained">
+              Login
             </Button>
-          </FormControl>
+            </FormControl>
         </form>
-        <Typography variant="h6" component="p">
-          If you are new to the application, please{" "}
-          <Link onClick={() => changeValue(true)} to="/signup">
-            {" "}
-            click{" "}
+
+        <Flippy
+          flipOnHover={true}
+          flipOnClick={false}
+          flipDirection="vertical"
+          style={styles.flippy}
+          
+        >
+           
+          <FrontSide>
+               <Typography style={{textAlign:'center'}} variant="h5" >New to the application ?</Typography>
+          </FrontSide>
+
+          <BackSide style={{alignItems:'center'}} >
+           <Typography style={{textAlign:'center'}} variant="h5">Click {" "}
+             <Link onClick={() => changeValue(true)} to="/signup">
+            here
           </Link>{" "}
           to signup.
-        </Typography>
+            </Typography>
+          </BackSide>
+         
+        </Flippy>
+
       </div>
     </div>
   );

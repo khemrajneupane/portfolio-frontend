@@ -76,6 +76,8 @@ const CreateNewWorkExperience = props => {
             name="rating"
             value={props.rating}
             type="number"
+            min="1"
+            max="5"           
             placeholder="rate this wexperience [1-5]"
             onChange={props.handleRatingChange}
           />

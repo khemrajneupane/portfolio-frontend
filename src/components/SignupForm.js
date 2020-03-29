@@ -11,6 +11,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import { Link } from "react-router-dom";
+
+import Flippy, { FrontSide, BackSide } from 'react-flippy';
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
@@ -63,12 +65,20 @@ const SignupForm = ({
   const handleMouseDownPassword = event => {
     event.preventDefault();
   };
+  const styles={
+    flippy:{
+   
+    width: '95%',
+    marginLeft: '8px',
+    marginTop:'20px'
+    }
+  }
 
   return (
     <div className={classes.root}>
       <div className={classes.marginCentered}>
         <Typography variant="h3" component="p">
-          Create Account
+          Create an Account
         </Typography>
         <form onSubmit={onSubmit}>
           <FormControl
@@ -83,7 +93,7 @@ const SignupForm = ({
               onChange={handleEmailChange}
             />
             <FormHelperText id="filled-weight-helper-text">
-              Type your valid email
+              <small>Type your valid email</small>
             </FormHelperText>
           </FormControl>
 
@@ -99,7 +109,7 @@ const SignupForm = ({
               onChange={handleFullnameChange}
             />
             <FormHelperText id="filled-weight-helper-text">
-              Type your Full Name
+              <small>Type your Full Name</small>
             </FormHelperText>
           </FormControl>
           <br />
@@ -116,7 +126,7 @@ const SignupForm = ({
               onChange={handleUsernameChange}
             />
             <FormHelperText id="filled-weight-helper-text">
-              Type a username, remember it.
+              <small>Type an username of your choice</small>
             </FormHelperText>
           </FormControl>
           <FormControl
@@ -145,7 +155,7 @@ const SignupForm = ({
               }
             />
             <FormHelperText id="filled-weight-helper-text">
-              Type a password, remember it.
+              <small>Type a password of your choice</small>
             </FormHelperText>
           </FormControl>
           <FormControl
@@ -162,16 +172,28 @@ const SignupForm = ({
             </Button>
           </FormControl>
         </form>
-        <div className={classes.withoutLabel}>
-          <FormHelperText id="filled-weight-helper-text">
-            Already a member can
-          </FormHelperText>
-          <Link onClick={() => changeValue(false)} to="/login">
-            <Button id="signup" type="submit" variant="contained">
-              Sign in
-            </Button>
-          </Link>
-        </div>
+        <Flippy
+          flipOnHover={true}
+          flipOnClick={false}
+          flipDirection="vertical"
+          style={styles.flippy}
+        >
+           
+          <FrontSide>
+               <Typography style={{textAlign:'center'}} variant="h5" >Already a member ?</Typography>
+          </FrontSide>
+
+          <BackSide style={{alignItems:'center'}} >
+           <Typography style={{textAlign:'center'}} variant="h5"> Click{" "}
+            <Link onClick={() => changeValue(false)} to="/login">
+              here
+            </Link>{" "} 
+            to sign in
+            </Typography>
+          </BackSide>
+         
+        </Flippy>
+
       </div>
     </div>
   );

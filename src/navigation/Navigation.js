@@ -14,7 +14,7 @@ import WithRouterCreateWorkExperience from "../components/experiences/CreateNewW
 import WorkExperienceList from "../components/experiences/WorkExperienceList";
 import { MenuItem } from "@material-ui/core";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import Colleges from "../components/Colleges";
+import Dashboard from "../components/Dashboard";
 
 const HeaderLink = () => {
   const styles = {
@@ -56,8 +56,8 @@ const HeaderLink = () => {
           <Link id="experiences" className="navbar-brand" to="/workexperience">
             Experiences
           </Link>
-          <Link id="colleges" className="navbar-brand" to="/colleges">
-            Colleges
+          <Link id="colleges" className="navbar-brand" to="/dashboard">
+            Dashboard
           </Link>
           <Link id="cv" className="navbar-brand" to="/cv">
             CV
@@ -145,8 +145,8 @@ const Navigation = props => {
         ),
         (<Footer />)
       );
-    } else if (page === "colleges") {
-      return (<Colleges />), (<Footer />);
+    } else if (page === "dashboard") {
+      return (<Dashboard portfolio={props.portfolio} workexperience={props.workexperience}/>), (<Footer />);
     }
   };
 
@@ -245,8 +245,8 @@ const Navigation = props => {
 
           <Route exact path="/hobbies" render={() => <Hobbies />} />
           <Route exact path="/cv" render={() => <CurriculumVitae />} />
-          <Route exact path="/login" />
-          <Route exact path="/colleges" render={() => <Colleges />} />
+          <Route exact path="/logout" />
+          <Route exact path="/dashboard" render={() => <Dashboard portfolio={props.portfolio} workexperience={props.workexperience}/>} />
         </div>
       </Router>
 

@@ -67,6 +67,8 @@ const CreateNewPortfolio = props => {
             name="votes"
             value={props.votes}
             type="number"
+            min="1"
+            max="5"
             placeholder="rate this project [1-5]"
             onChange={props.handleVotesChange}
           />
